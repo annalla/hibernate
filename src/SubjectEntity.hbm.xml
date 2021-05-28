@@ -1,0 +1,21 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="pojo.SubjectEntity" table="subject" schema="public" catalog="dkhp">
+        <id name="subId">
+            <column name="sub_id" sql-type="integer"/>
+        </id>
+        <property name="subjectId">
+            <column name="subject_id" sql-type="varchar(15)" length="15"/>
+        </property>
+        <property name="subjectname">
+            <column name="subjectname" sql-type="varchar(50)" length="50"/>
+        </property>
+        <property name="credit">
+            <column name="credit" sql-type="integer"/>
+        </property>
+    </class>
+</hibernate-mapping>

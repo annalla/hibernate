@@ -1,0 +1,27 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="pojo.CourseEntity" table="course" schema="public" catalog="dkhp">
+        <id name="courseId">
+            <column name="course_id" sql-type="integer"/>
+        </id>
+        <property name="coursename">
+            <column name="coursename" sql-type="varchar(250)" length="250"/>
+        </property>
+        <property name="teacher">
+            <column name="teacher" sql-type="varchar(250)" length="250"/>
+        </property>
+        <property name="day">
+            <column name="day" sql-type="integer"/>
+        </property>
+        <property name="period">
+            <column name="period" sql-type="integer"/>
+        </property>
+        <property name="maximum">
+            <column name="maximum" sql-type="integer"/>
+        </property>
+    </class>
+</hibernate-mapping>
