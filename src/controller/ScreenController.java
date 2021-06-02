@@ -22,8 +22,8 @@ public class ScreenController {
 
     public void setDashboard(JPanel jpnItem, JLabel jlbItem) {
         kindSelected = "Account";
-        jpnItem.setBackground(new Color(96, 100, 191));
-        jlbItem.setBackground(new Color(96, 100, 191));
+        jpnItem.setBackground(new Color(175, 177, 179));
+        jlbItem.setBackground(new Color(175, 177, 179));
         JPanel node = new AccountStudentjPn();
         jpbView.removeAll();
         jpbView.setLayout(new BorderLayout());
@@ -110,6 +110,7 @@ public class ScreenController {
                 item.getJlb().setBackground(new Color(177,175,179));
             }
             else{
+
                 item.getJpn().setBackground(new Color(238,238,238));
                 item.getJlb().setBackground(new Color(238,238,238));
             }

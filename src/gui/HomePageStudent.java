@@ -7,9 +7,17 @@
 package gui;
 
 import controller.ScreenController;
+import dao.StudentDAO;
+import pojo.StudentEntity;
 
 import java.util.ArrayList;
 import java.util.List;
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
 
 /**
  *
@@ -20,6 +28,7 @@ public class HomePageStudent extends javax.swing.JFrame {
     /**
      * Creates new form HomePageStudent
      */
+    public static String nameLogin;
     public HomePageStudent() {
         initComponents();
         List<DanhMuc> listDanhMuc = new ArrayList<>();
@@ -30,7 +39,15 @@ public class HomePageStudent extends javax.swing.JFrame {
         ScreenController controller = new ScreenController(jPnStudent);
         controller.setDashboard(jPnAccount, jLbAccount);
         controller.setEvent(listDanhMuc);
-
+        setUser();
+    }
+    private void setUser() {
+        StudentEntity st=StudentDAO.getStudentbyUsername(Login.nameLogin);
+        nameLogin = Login.nameLogin;
+        jLbAccount.setText(st.getFullname());
+    }
+    private StudentEntity getUser(){
+        return StudentDAO.getStudentbyUsername(Login.nameLogin);
     }
 
     /**
@@ -134,14 +151,13 @@ public class HomePageStudent extends javax.swing.JFrame {
         jPnAccount.setLayout(jPnAccountLayout);
         jPnAccountLayout.setHorizontalGroup(
                 jPnAccountLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPnAccountLayout.createSequentialGroup()
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jLbAccount)
-                                .addContainerGap())
+                        .addGroup(jPnAccountLayout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(jLbAccount, javax.swing.GroupLayout.DEFAULT_SIZE, 170, Short.MAX_VALUE))
         );
         jPnAccountLayout.setVerticalGroup(
                 jPnAccountLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jLbAccount, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLbAccount, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout jPnNavLayout = new javax.swing.GroupLayout(jPnNav);
@@ -149,11 +165,11 @@ public class HomePageStudent extends javax.swing.JFrame {
         jPnNavLayout.setHorizontalGroup(
                 jPnNavLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(jPnNavLayout.createSequentialGroup()
-                                .addGap(0, 47, Short.MAX_VALUE)
+                                .addGap(0, 0, Short.MAX_VALUE)
                                 .addComponent(jPnDS, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addComponent(jPnRegister, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(210, 210, 210)
+                                .addGap(89, 89, 89)
                                 .addComponent(jPnAccount, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addComponent(btnLogout)
@@ -167,8 +183,8 @@ public class HomePageStudent extends javax.swing.JFrame {
                                         .addComponent(jPnDS, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addComponent(jPnRegister, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addGroup(jPnNavLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                                .addComponent(btnLogout, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 27, Short.MAX_VALUE)
-                                                .addComponent(jPnAccount, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                                .addComponent(jPnAccount, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                .addComponent(btnLogout, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                                 .addContainerGap(22, Short.MAX_VALUE))
         );
 
@@ -207,6 +223,9 @@ public class HomePageStudent extends javax.swing.JFrame {
 
     private void btnLogoutActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
+        dispose();
+        Login login = new Login();
+        login.setVisible(true);
     }
 
     /**

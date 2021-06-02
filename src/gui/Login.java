@@ -178,20 +178,8 @@ public class Login extends javax.swing.JFrame {
      *//*
 
      */
-    /*public static void main(String args[]) {
-     *//*
-     */
-    /* Set the Nimbus look and feel *//*
-     */
-/*
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        *//*
-     */
-    /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-     * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
-     *//*
-     */
-/*
+    public static void main(String args[]) {
+
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
@@ -210,17 +198,13 @@ public class Login extends javax.swing.JFrame {
         }
         //</editor-fold>
 
-        *//*
-     */
-    /* Create and display the form *//*
-     */
-/*
+
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new login().setVisible(true);
+                new Login().setVisible(true);
             }
         });
-    }*/
+    }
 
 
     // Variables declaration - do not modify
@@ -238,6 +222,7 @@ public class Login extends javax.swing.JFrame {
         jTFPass.setText("");
         jTFUsername.requestFocus();
     }
+
 
     public void send() {
         String strnull = "";
@@ -267,6 +252,7 @@ public class Login extends javax.swing.JFrame {
                     if (user.equals(username) && pass.equals(password)&& type==1) {
 
                         nameLogin = username;
+                        thongBaoMatKhau="Cảnh Báo : Mật Khẩu của bạn hiện đang là mật khẩu mặc định ! Vui lòng đổi mật khẩu mới !";
                         new HomePageStudent().setVisible(true);
                         dispose();
 
@@ -274,11 +260,12 @@ public class Login extends javax.swing.JFrame {
                     if (user.equals(username) && pass.equals(password)&& type==2) {
 
                         nameLogin = username;
+                        thongBaoMatKhau="Cảnh Báo : Mật Khẩu của bạn hiện đang là mật khẩu mặc định ! Vui lòng đổi mật khẩu mới !";
                         new HomePageStudent().setVisible(true);
                         dispose();
 
                     }
-                    if(username==null|| username.equals("")){
+                    else{
 
                         JOptionPane.showMessageDialog(this, "Tên người dùng hoặc mật khẩu không hợp lệ\nXin vui lòng thử lại!", "Đăng nhập thấy bại!", JOptionPane.ERROR_MESSAGE);
                         this.resetForm();
