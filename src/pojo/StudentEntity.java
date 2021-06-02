@@ -12,6 +12,7 @@ public class StudentEntity {
     private Date birthday;
     private String address;
     private int gender;
+    private ClazzEntity classs;
 
     public int getStudentId() {
         return studentId;
@@ -19,6 +20,14 @@ public class StudentEntity {
 
     public void setStudentId(int studentId) {
         this.studentId = studentId;
+    }
+
+    public ClazzEntity getClasss() {
+        return classs ;
+    }
+
+    public void setClasss(ClazzEntity classs) {
+        this.classs =classs ;
     }
 
     public String getUsername() {
@@ -82,11 +91,11 @@ public class StudentEntity {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         StudentEntity that = (StudentEntity) o;
-        return studentId == that.studentId && gender == that.gender && Objects.equals(username, that.username) && Objects.equals(password, that.password) && Objects.equals(mssv, that.mssv) && Objects.equals(fullname, that.fullname) && Objects.equals(birthday, that.birthday) && Objects.equals(address, that.address);
+        return studentId == that.studentId && gender == that.gender && Objects.equals(username, that.username) && Objects.equals(password, that.password) && Objects.equals(mssv, that.mssv) && Objects.equals(fullname, that.fullname) && Objects.equals(birthday, that.birthday) && Objects.equals(address, that.address) && Objects.equals(classs, that.classs);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(studentId, username, password, mssv, fullname, birthday, address, gender);
+        return Objects.hash(studentId, username, password, mssv, fullname, birthday, address, gender,classs);
     }
 }

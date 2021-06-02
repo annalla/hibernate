@@ -29,5 +29,9 @@
         <property name="gender">
             <column name="gender" sql-type="integer"/>
         </property>
+        <many-to-one class="pojo.ClazzEntity" name="classs"
+                     fetch="select" lazy="false">
+            <column length="45" name="class_id" not-null="true"/>
+        </many-to-one>
     </class>
 </hibernate-mapping>

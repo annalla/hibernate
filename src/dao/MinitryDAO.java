@@ -5,6 +5,7 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 import pojo.MinitryEntity;
+import pojo.StudentEntity;
 import util.HibernateUtil;
 
 import java.util.List;
@@ -25,11 +26,29 @@ public class MinitryDAO {
         }
         return ds;
     }
+    public static MinitryEntity getMinitrybyUsername(String username) {
+        MinitryEntity st = null;
+        Session session = HibernateUtil.getSessionFactory()
+                .openSession();
+        try {
+            String hql = "select m from MinitryEntity m where m.username =:username";
+            Query query = session.createQuery(hql);
+            query.setString("username",username);
+            st=(MinitryEntity) query.uniqueResult();
+        } catch (HibernateException ex) {
+//Log the exception
+            System.err.println(ex);
+        } finally {
+            session.close();
+        }
+        return st;
+    }
     public static MinitryEntity getInforMinitry(String minitryId) {
         MinitryEntity sv = null;
         Session session = HibernateUtil.getSessionFactory().openSession();
         try {
-            sv = (MinitryEntity) session.get(MinitryEntity.class,minitryId);
+            int minitry=Integer.parseInt(minitryId);
+            sv = (MinitryEntity) session.get(MinitryEntity.class,minitry);
         } catch (HibernateException ex) {
 //Log the exception
             System.err.println(ex);
