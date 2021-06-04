@@ -9,6 +9,24 @@ public class CourseEntity {
     private int day;
     private int period;
     private int maximum;
+    private String room;
+    private SubjectEntity subject;
+
+    public String getRoom() {
+        return room;
+    }
+
+    public void setRoom(String room) {
+        this.room = room;
+    }
+
+    public SubjectEntity getSubject() {
+        return subject;
+    }
+
+    public void setSubject(SubjectEntity subject) {
+        this.subject = subject;
+    }
 
     public int getCourseId() {
         return courseId;

@@ -26,7 +26,7 @@ public class ScreenController {
         jlbItem.setBackground(new Color(175, 177, 179));
         JPanel node = new AccountStudentjPn();
         jpbView.removeAll();
-        jpbView.setLayout(new BorderLayout());
+        //jpbView.setLayout(new SpringLayout());
         jpbView.add(node);
         jpbView.validate();
         jpbView.repaint();

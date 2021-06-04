@@ -20,5 +20,8 @@
         <property name="endsemester">
             <column name="endsemester" sql-type="date"/>
         </property>
+        <property name="ispresent">
+            <column name="ispresent" sql-type="boolean"/>
+        </property>
     </class>
 </hibernate-mapping>

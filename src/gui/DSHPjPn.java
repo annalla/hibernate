@@ -5,6 +5,8 @@
  */
 package gui;
 
+import controller.StudentController;
+
 /**
  *
  * @author Xuyen
@@ -12,10 +14,12 @@ package gui;
 public class DSHPjPn extends javax.swing.JPanel {
 
     /**
-     * Creates new form DSHPjPn
+     * Creates new form RegisterjPn
      */
     public DSHPjPn() {
         initComponents();
+        StudentController controller=new StudentController(jPnDS,jTFSearch);
+        controller.setDataToTableCourse(HomePageStudent.nameLogin);
     }
 
     /**
@@ -27,30 +31,52 @@ public class DSHPjPn extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">
     private void initComponents() {
 
-        jButton1 = new javax.swing.JButton();
+        jPnDS = new javax.swing.JPanel();
+        jTFSearch = new javax.swing.JTextField();
 
-        jButton1.setText("jButton1");
+        javax.swing.GroupLayout jPnDSLayout = new javax.swing.GroupLayout(jPnDS);
+        jPnDS.setLayout(jPnDSLayout);
+        jPnDSLayout.setHorizontalGroup(
+                jPnDSLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGap(0, 890, Short.MAX_VALUE)
+        );
+        jPnDSLayout.setVerticalGroup(
+                jPnDSLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGap(0, 469, Short.MAX_VALUE)
+        );
+
+        jTFSearch.setBorder(null);
+        jTFSearch.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTFSearchActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
                 layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addContainerGap(165, Short.MAX_VALUE)
-                                .addComponent(jButton1)
-                                .addGap(162, 162, 162))
+                        .addGroup(layout.createSequentialGroup()
+                                .addComponent(jTFSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                        .addComponent(jPnDS, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
                 layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(layout.createSequentialGroup()
-                                .addGap(74, 74, 74)
-                                .addComponent(jButton1)
-                                .addContainerGap(203, Short.MAX_VALUE))
+                                .addComponent(jTFSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jPnDS, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>
 
+    private void jTFSearchActionPerformed(java.awt.event.ActionEvent evt) {
+        // TODO add your handling code here:
+    }
+
 
     // Variables declaration - do not modify
-    private javax.swing.JButton jButton1;
+    private javax.swing.JPanel jPnDS;
+    private javax.swing.JTextField jTFSearch;
     // End of variables declaration
 }

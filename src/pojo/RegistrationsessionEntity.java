@@ -8,6 +8,7 @@ public class RegistrationsessionEntity {
     private Timestamp startdate;
     private Timestamp enddate;
 
+
     public int getRegistId() {
         return registId;
     }

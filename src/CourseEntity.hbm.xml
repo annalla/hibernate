@@ -23,5 +23,12 @@
         <property name="maximum">
             <column name="maximum" sql-type="integer"/>
         </property>
+        <property name="room">
+            <column name="room" sql-type="varchar(10)" length="10"/>
+        </property>
+        <many-to-one class="pojo.SubjectEntity" name="subject"
+                     fetch="select" lazy="false">
+            <column length="45" name="sub_id" not-null="true"/>
+        </many-to-one>
     </class>
 </hibernate-mapping>

@@ -3,19 +3,114 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+/*
+
+ */
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package gui;
 
-/**
- *
- * @author Xuyen
- */
+
+import dao.StudentDAO;
+import pojo.StudentEntity;
+
+
 public class AccountStudentjPn extends javax.swing.JPanel {
+    public static StudentEntity st = StudentDAO.getStudentbyUsername(HomePageStudent.nameLogin);
 
     /**
      * Creates new form AccountStudentjPn
      */
     public AccountStudentjPn() {
         initComponents();
+        setInforStudent();
+    }
+
+    public void setInforStudent() {
+        jTFName.setText(st.getFullname());
+        jTFName.setEnabled(false);
+        jTFMSSV.setText(st.getMssv());
+        jTFMSSV.setEnabled(false);
+        jTFUsername.setText(st.getUsername());
+        jTFUsername.setEnabled(false);
+        jTAAddress.setText(st.getAddress());
+        jTAAddress.setEnabled(false);
+        jCBgender.setSelectedIndex(st.getGender());
+        jCBgender.setEnabled(false);
+        jDCBirthday.setDate(st.getBirthday());
+        jDCBirthday.setEnabled(false);
+        jLbNewPass.setVisible(false);
+        jLbOldPass.setVisible(false);
+        jLbRepass.setVisible(false);
+        jPFnewpass.setVisible(false);
+        jPFoldpass.setVisible(false);
+        jTFrepass.setVisible(false);
+        btnSave.setVisible(false);
+        btnSave.setEnabled(false);
+        btnUpdate.setVisible(true);
+        btnUpdate.setEnabled(true);
+        btnSavePass.setVisible(false);
+        btnSavePass.setEnabled(false);
+        btnChangPass.setVisible(true);
+        btnChangPass.setEnabled(true);
+
+    }
+
+    public void setBtnUpdate() {
+        jTFName.setEnabled(true);
+        jTFUsername.setEnabled(false);
+        jTFMSSV.setEnabled(false);
+        jTAAddress.setEnabled(true);
+        jCBgender.setEnabled(true);
+        jDCBirthday.setEnabled(true);
+        jLbNewPass.setVisible(false);
+        jLbOldPass.setVisible(false);
+        jLbRepass.setVisible(false);
+        jPFnewpass.setVisible(false);
+        jPFoldpass.setVisible(false);
+        jTFrepass.setVisible(false);
+        btnSave.setVisible(true);
+        btnSave.setEnabled(true);
+        btnUpdate.setVisible(false);
+        btnUpdate.setEnabled(false);
+        btnSavePass.setVisible(false);
+        btnSavePass.setEnabled(false);
+        btnChangPass.setVisible(true);
+        btnChangPass.setEnabled(true);
+        jTFName.requestFocus();
+    }
+
+    public void setBtnChangPass() {
+        jTFName.setText(st.getFullname());
+        jTFName.setEnabled(false);
+        jTFMSSV.setText(st.getMssv());
+        jTFMSSV.setEnabled(false);
+        jTFUsername.setText(st.getUsername());
+        jTFUsername.setEnabled(false);
+        jTAAddress.setText(st.getAddress());
+        jTAAddress.setEnabled(false);
+        jCBgender.setSelectedIndex(st.getGender());
+        jCBgender.setEnabled(false);
+        jDCBirthday.setDate(st.getBirthday());
+        jDCBirthday.setEnabled(false);
+        jLbNewPass.setVisible(true);
+        jLbOldPass.setVisible(true);
+        jLbRepass.setVisible(true);
+        jPFnewpass.setVisible(true);
+        jPFoldpass.setVisible(true);
+        jTFrepass.setVisible(true);
+        btnSave.setVisible(false);
+        btnSave.setEnabled(false);
+        btnUpdate.setVisible(false);
+        btnUpdate.setEnabled(false);
+        btnSavePass.setVisible(true);
+        btnSavePass.setEnabled(true);
+        btnChangPass.setVisible(false);
+        btnChangPass.setEnabled(false);
+        jPFoldpass.requestFocus();
     }
 
     /**
@@ -29,38 +124,363 @@ public class AccountStudentjPn extends javax.swing.JPanel {
 
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jLbOldPass = new javax.swing.JLabel();
+        jLbNewPass = new javax.swing.JLabel();
+        jLbRepass = new javax.swing.JLabel();
+        jTFrepass = new javax.swing.JPasswordField();
+        jPFnewpass = new javax.swing.JPasswordField();
+        jPFoldpass = new javax.swing.JPasswordField();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTAAddress = new javax.swing.JTextArea();
+        jTFName = new javax.swing.JTextField();
+        jTFUsername = new javax.swing.JTextField();
+        jTFMSSV = new javax.swing.JTextField();
+        jDCBirthday = new com.toedter.calendar.JDateChooser();
+        btnUpdate = new javax.swing.JButton();
+        btnSee = new javax.swing.JButton();
+        btnChangPass = new javax.swing.JButton();
+        jCBgender = new javax.swing.JComboBox<>();
+        btnSave = new javax.swing.JButton();
+        btnSavePass = new javax.swing.JButton();
 
-        jLabel1.setText("jLabel1");
+        setPreferredSize(new java.awt.Dimension(800, 778));
 
-        jLabel2.setText("jLabel2");
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel1.setText("THÔNG TIN TÀI KHOẢN");
 
+        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel2.setText("Họ tên:");
+
+        jLabel4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel4.setText("MSSV:");
+
+        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel3.setText("Username:");
+
+        jLabel5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel5.setText("Ngày sinh:");
+
+        jLabel6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel6.setText("Giới tính:");
+
+        jLabel7.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel7.setText("Địa chỉ:");
+
+        jLbOldPass.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLbOldPass.setText("Mật khẩu cũ:");
+
+        jLbNewPass.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLbNewPass.setText("Mật khẩu mới:");
+
+        jLbRepass.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLbRepass.setText("Nhập lại mật khẩu:");
+
+        jPFoldpass.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jPFoldpassActionPerformed(evt);
+            }
+        });
+        jPFoldpass.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jOldpassKeyReleased(evt);
+            }
+        });
+        jPFnewpass.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jNewpassKeyReleased(evt);
+            }
+        });
+        jTFrepass.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jRepassKeyReleased(evt);
+            }
+        });
+
+        jTAAddress.setColumns(20);
+        jTAAddress.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jTAAddress.setRows(5);
+        jScrollPane1.setViewportView(jTAAddress);
+        jTAAddress.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jAddressKeyReleased(evt);
+            }
+        });
+
+        jTFName.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jTFName.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTFNameKeyReleased(evt);
+            }
+        });
+
+        jTFUsername.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+
+        jTFMSSV.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+
+        jDCBirthday.setFocusable(false);
+        jDCBirthday.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jDCBirthday.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jDCBirthdayReleased(evt);
+            }
+        });
+        btnUpdate.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        btnUpdate.setText("Cập nhật");
+        btnUpdate.setActionCommand("");
+        btnUpdate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUpdateActionPerformed(evt);
+            }
+        });
+
+        btnSee.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        btnSee.setText("Xem");
+        btnSee.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSeeActionPerformed(evt);
+            }
+        });
+
+        btnChangPass.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        btnChangPass.setText("Đổi mật khẩu");
+        btnChangPass.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnChangPassActionPerformed(evt);
+            }
+        });
+
+        jCBgender.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jCBgender.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Nữ", "Nam" }));
+        jCBgender.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jGenderKeyReleased(evt);
+            }
+        });
+        btnSave.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        btnSave.setText("Lưu");
+        btnSave.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSaveActionPerformed(evt);
+            }
+        });
+
+        btnSavePass.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        btnSavePass.setText("Lưu");
+        btnSavePass.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSavePassActionPerformed(evt);
+            }
+        });
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
                 layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(layout.createSequentialGroup()
-                                .addGap(132, 132, 132)
-                                .addComponent(jLabel1)
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addContainerGap(221, Short.MAX_VALUE)
-                                .addComponent(jLabel2)
-                                .addGap(145, 145, 145))
+                                .addGap(50, 50, 50)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jLabel4)
+                                        .addComponent(jLabel3)
+                                        .addComponent(jLabel1)
+                                        .addGroup(layout.createSequentialGroup()
+                                                .addGap(14, 14, 14)
+                                                .addComponent(btnSee, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(btnUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(btnSave, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(btnSavePass, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addGap(12, 12, 12)
+                                                .addComponent(btnChangPass, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                                .addComponent(jTFUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 453, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                                .addComponent(jLbRepass)
+                                                                .addComponent(jLbNewPass)
+                                                                .addComponent(jLbOldPass)
+                                                                .addComponent(jLabel7)
+                                                                .addComponent(jLabel6)
+                                                                .addComponent(jLabel2)
+                                                                .addComponent(jLabel5))
+                                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                                .addGroup(layout.createSequentialGroup()
+                                                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                                                .addComponent(jTFName, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 450, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                                                                        .addComponent(jPFoldpass, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 441, Short.MAX_VALUE)
+                                                                                        .addComponent(jTFrepass, javax.swing.GroupLayout.Alignment.TRAILING)
+                                                                                        .addComponent(jPFnewpass, javax.swing.GroupLayout.Alignment.TRAILING))))
+                                                                .addGroup(layout.createSequentialGroup()
+                                                                        .addGap(1, 1, 1)
+                                                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                                                                .addComponent(jCBgender, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                                                .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 453, Short.MAX_VALUE)
+                                                                                .addComponent(jDCBirthday, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
+                                                .addComponent(jTFMSSV, javax.swing.GroupLayout.PREFERRED_SIZE, 453, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addContainerGap(407, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
                 layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(layout.createSequentialGroup()
-                                .addGap(72, 72, 72)
-                                .addComponent(jLabel1)
-                                .addGap(26, 26, 26)
-                                .addComponent(jLabel2)
-                                .addContainerGap(174, Short.MAX_VALUE))
+                                .addGap(12, 12, 12)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addComponent(btnSavePass, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGroup(layout.createSequentialGroup()
+                                                .addComponent(jLabel1)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                                        .addComponent(jTFName, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                .addGap(9, 9, 9)
+                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                                        .addComponent(jTFUsername)
+                                                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                                        .addComponent(jLabel4)
+                                                        .addComponent(jTFMSSV, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                                        .addComponent(jDCBirthday, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                        .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                                        .addComponent(jLabel6)
+                                                        .addComponent(jCBgender, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                        .addGroup(layout.createSequentialGroup()
+                                                                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                                                .addComponent(jLbOldPass)
+                                                                .addGap(26, 26, 26)
+                                                                .addComponent(jLbNewPass))
+                                                        .addGroup(layout.createSequentialGroup()
+                                                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                                                .addComponent(jPFoldpass, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                                                .addComponent(jPFnewpass, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                                        .addComponent(jLbRepass)
+                                                        .addComponent(jTFrepass, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                .addGap(34, 34, 34)
+                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                                                .addComponent(btnSee, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                                .addComponent(btnUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                                .addComponent(btnSave, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                        .addComponent(btnChangPass, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addContainerGap(164, Short.MAX_VALUE))
         );
     }// </editor-fold>
 
 
+
+    private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {
+        // TODO add your handling code here:
+        setBtnUpdate();
+    }
+
+    private void btnSeeActionPerformed(java.awt.event.ActionEvent evt) {
+        // TODO add your handling code here:
+        setInforStudent();
+    }
+
+    private void btnChangPassActionPerformed(java.awt.event.ActionEvent evt) {
+        // TODO add your handling code here:
+        setBtnChangPass();
+    }
+
+    private void jPFoldpassActionPerformed(java.awt.event.ActionEvent evt) {
+        // TODO add your handling code here:
+    }
+
+    private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {
+        // TODO add your handling code here:
+    }
+
+    private void btnSavePassActionPerformed(java.awt.event.ActionEvent evt) {
+        // TODO add your handling code here:
+    }
+
+    private void jTFNameKeyReleased(java.awt.event.KeyEvent evt) {
+        if (evt.getKeyCode() == evt.VK_ENTER) {
+            jDCBirthday.requestFocus();
+        }
+    }
+
+    private void jDCBirthdayReleased(java.awt.event.KeyEvent evt) {
+        if (evt.getKeyCode() == evt.VK_ENTER) {
+            jCBgender.requestFocus();
+        }
+    }
+
+    private void jGenderKeyReleased(java.awt.event.KeyEvent evt) {
+        if (evt.getKeyCode() == evt.VK_ENTER) {
+            jTAAddress.requestFocus();
+        }
+    }
+
+    private void jAddressKeyReleased(java.awt.event.KeyEvent evt) {
+        if (evt.getKeyCode() == evt.VK_ENTER) {
+            ////////////
+        }
+    }
+
+    private void jOldpassKeyReleased(java.awt.event.KeyEvent evt) {
+        if (evt.getKeyCode() == evt.VK_ENTER) {
+            jPFnewpass.requestFocus();
+        }
+    }
+
+    private void jNewpassKeyReleased(java.awt.event.KeyEvent evt) {
+        if (evt.getKeyCode() == evt.VK_ENTER) {
+            jTFrepass.requestFocus();
+        }
+    }
+
+    private void jRepassKeyReleased(java.awt.event.KeyEvent evt) {
+        if (evt.getKeyCode() == evt.VK_ENTER) {
+            ////////////
+        }
+    }
+
+
     // Variables declaration - do not modify
+    private javax.swing.JButton btnChangPass;
+    private javax.swing.JButton btnSave;
+    private javax.swing.JButton btnSavePass;
+    private javax.swing.JButton btnSee;
+    private javax.swing.JButton btnUpdate;
+    private javax.swing.JComboBox<String> jCBgender;
+    private com.toedter.calendar.JDateChooser jDCBirthday;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLbNewPass;
+    private javax.swing.JLabel jLbOldPass;
+    private javax.swing.JLabel jLbRepass;
+    private javax.swing.JPasswordField jPFnewpass;
+    private javax.swing.JPasswordField jPFoldpass;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextArea jTAAddress;
+    private javax.swing.JTextField jTFMSSV;
+    private javax.swing.JTextField jTFName;
+    private javax.swing.JTextField jTFUsername;
+    private javax.swing.JPasswordField jTFrepass;
     // End of variables declaration
 }

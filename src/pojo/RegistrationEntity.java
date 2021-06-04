@@ -6,6 +6,25 @@ import java.util.Objects;
 public class RegistrationEntity {
     private int registrationId;
     private Timestamp time;
+    private StudentEntity student;
+    private CourseEntity course;
+
+    public CourseEntity getCourse() {
+        return course;
+    }
+
+    public void setCourse(CourseEntity course) {
+        this.course = course;
+    }
+
+    public StudentEntity getStudent() {
+        return student;
+    }
+
+    public void setStudent(StudentEntity student) {
+        this.student = student;
+    }
+
 
     public int getRegistrationId() {
         return registrationId;

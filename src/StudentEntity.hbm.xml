@@ -33,5 +33,11 @@
                      fetch="select" lazy="false">
             <column length="45" name="class_id" not-null="true"/>
         </many-to-one>
+        <set inverse="true" name="registered" fetch="join" lazy="false">
+            <key>
+                <column length="45" name="student_id" not-null="true"/>
+            </key>
+            <one-to-many class="pojo.RegistrationEntity"/>
+        </set>
     </class>
 </hibernate-mapping>

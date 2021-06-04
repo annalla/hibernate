@@ -3,8 +3,6 @@ package com.company;
 import gui.HomePageStudent;
 import gui.Login;
 
-import javax.swing.*;
-
 public class Main {
     public static void setLoginView(){
 
@@ -19,11 +17,14 @@ public class Main {
         }
         StudentEntity st = StudentDAO.getStudentbyUsername("1712001");
         if(st!=null){
-            ClazzEntity cl=st.getClasss();
-            System.out.println("dhsyfghj:" +st.getStudentId());
+            Set<RegistrationEntity> r=st.getRegistered();
+            System.out.println(r.size());
+            for(RegistrationEntity re:r){
+                System.out.println("dhsyfghj:" +re.getCourse().getSubject().getSubjectname());
+            }
+
         }*/
         new Login().setVisible(true);
-
 
     }
 }

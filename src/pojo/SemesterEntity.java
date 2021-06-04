@@ -9,6 +9,15 @@ public class SemesterEntity {
     private int year;
     private Date startsemester;
     private Date endsemester;
+    public boolean ispresent;
+
+    public boolean getIspresent(){
+        return ispresent;
+    }
+
+    public void setIspresent(boolean ispresent) {
+        this.ispresent = ispresent;
+    }
 
     public int getSemesterId() {
         return semesterId;
