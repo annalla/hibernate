@@ -1,9 +1,6 @@
 package controller;
 
-import gui.AccountStudentjPn;
-import gui.DSHPjPn;
-import gui.DanhMuc;
-import gui.RegisterjPn;
+import gui.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -64,6 +61,15 @@ public class ScreenController {
                     break;
                 case "Register":
                     node = new RegisterjPn();
+                    break;
+                case "AccountGV":
+                    node =new AccountGVjPn();
+                    break;
+                case "TKGV":
+                    node =new jPnQLGV();
+                    break;
+                case "QLSV":
+                    node =new jPnQLStudent();
                     break;
                 default:
                     break;

@@ -254,7 +254,11 @@ public class Login extends javax.swing.JFrame {
                         nameLogin = username;
                         new GVHomePage().setVisible(true);
                         dispose();
-                        JOptionPane.showMessageDialog(this, "Mật Khẩu của bạn hiện đang là mật khẩu mặc định ! Vui lòng đổi mật khẩu mới !\n","Cảnh báo mật khẩu" , JOptionPane.ERROR_MESSAGE);
+                        if(user.equals(pass)){
+                            JOptionPane.showMessageDialog(this, "Mật Khẩu của bạn hiện đang là mật khẩu mặc định ! Vui lòng đổi mật khẩu mới !\n","Cảnh báo mật khẩu" , JOptionPane.ERROR_MESSAGE);
+
+                        }
+
 
 
                     }
@@ -264,8 +268,10 @@ public class Login extends javax.swing.JFrame {
                         nameLogin = username;
                         new HomePageStudent().setVisible(true);
                         dispose();
-                        JOptionPane.showMessageDialog(this, "Mật Khẩu của bạn hiện đang là mật khẩu mặc định ! Vui lòng đổi mật khẩu mới !\n","Cảnh báo mật khẩu" , JOptionPane.ERROR_MESSAGE);
+                        if(user.equals(pass)){
+                            JOptionPane.showMessageDialog(this, "Mật Khẩu của bạn hiện đang là mật khẩu mặc định ! Vui lòng đổi mật khẩu mới !\n","Cảnh báo mật khẩu" , JOptionPane.ERROR_MESSAGE);
 
+                        }
                     }
                     else{
 

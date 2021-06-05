@@ -7,6 +7,7 @@
     <class name="pojo.RegistrationEntity" table="registration" schema="public" catalog="dkhp">
         <id name="registrationId">
             <column name="registration_id" sql-type="integer"/>
+            <generator class="increment"></generator>
         </id>
         <property name="time">
             <column name="time" sql-type="timestamp"/>

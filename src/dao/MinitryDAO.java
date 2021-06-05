@@ -43,12 +43,12 @@ public class MinitryDAO {
         }
         return st;
     }
-    public static MinitryEntity getInforMinitry(String minitryId) {
+    public static MinitryEntity getInforMinitry(int minitryId) {
         MinitryEntity sv = null;
         Session session = HibernateUtil.getSessionFactory().openSession();
         try {
-            int minitry=Integer.parseInt(minitryId);
-            sv = (MinitryEntity) session.get(MinitryEntity.class,minitry);
+            //int minitry=Integer.parseInt(minitryId);
+            sv = (MinitryEntity) session.get(MinitryEntity.class,minitryId);
         } catch (HibernateException ex) {
 //Log the exception
             System.err.println(ex);
@@ -59,7 +59,7 @@ public class MinitryDAO {
     }
     public static boolean addMinitry(MinitryEntity sv) {
         Session session = HibernateUtil.getSessionFactory().openSession();
-        if (MinitryDAO.getInforMinitry(sv.getUsername())!=null) {
+        if (MinitryDAO.getMinitrybyUsername(sv.getUsername()) != null) {
             return false;
         }
         Transaction transaction = null;
@@ -71,6 +71,7 @@ public class MinitryDAO {
 //Log the exception
             transaction.rollback();
             System.err.println(ex);
+            return false;
         } finally {
             session.close();
         }
@@ -78,7 +79,7 @@ public class MinitryDAO {
     }
     public static boolean updateMinitry(MinitryEntity sv) {
         Session session = HibernateUtil.getSessionFactory().openSession();
-        if (MinitryDAO.getInforMinitry(sv.getUsername()) == null) {
+        if (MinitryDAO.getInforMinitry(sv.getMinitryId()) == null) {
             return false;
         }
         Transaction transaction = null;
@@ -90,6 +91,7 @@ public class MinitryDAO {
 //Log the exception
             transaction.rollback();
             System.err.println(ex);
+            return false;
         } finally {
             session.close();
         }
@@ -97,7 +99,7 @@ public class MinitryDAO {
     }
     public static boolean deleteMinitry(MinitryEntity sv) {
         Session session = HibernateUtil.getSessionFactory().openSession();
-        if (MinitryDAO.getInforMinitry(sv.getUsername()) == null) {
+        if (MinitryDAO.getInforMinitry(sv.getMinitryId()) == null) {
             return false;
         }
         Transaction transaction = null;
@@ -109,6 +111,7 @@ public class MinitryDAO {
 //Log the exception
             transaction.rollback();
             System.err.println(ex);
+            return false;
         } finally {
             session.close();
         }

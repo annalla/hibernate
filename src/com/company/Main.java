@@ -1,7 +1,9 @@
 package com.company;
 
+import dao.MinitryDAO;
 import gui.HomePageStudent;
 import gui.Login;
+import pojo.MinitryEntity;
 
 public class Main {
     public static void setLoginView(){

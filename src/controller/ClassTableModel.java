@@ -2,11 +2,10 @@ package controller;
 
 
 
-import pojo.CourseEntity;
-import pojo.RegistrationEntity;
-import pojo.SubjectEntity;
+import pojo.*;
 
 import java.util.ArrayList;
+import java.util.Set;
 import javax.swing.table.DefaultTableModel;
 
 
@@ -78,6 +77,87 @@ public class ClassTableModel {
             i++;
             dtm.addRow(obj);
 
+        }
+        return dtm;
+    }
+    public DefaultTableModel setTableMinitry(ArrayList<MinitryEntity> listItem, String[] listColumn) {
+        int columns = listColumn.length;
+        DefaultTableModel dtm = new DefaultTableModel() {
+            @Override
+            public boolean isCellEditable(int rowIndex, int colIndex) {
+                return false;
+            }
+
+            @Override
+            public Class<?> getColumnClass(int columnIndex) {
+                return String.class;
+            }
+        };
+        dtm.setColumnIdentifiers(listColumn);
+        Object[] obj;
+        int i=1;
+        for(MinitryEntity s:listItem){
+            obj=new Object[columns];
+            obj[0] = i;
+            obj[1] =s.getUsername();
+            obj[3] = s.getFullname();
+            obj[2] = s.getPassword();
+            if (s.getGender()==0){
+                obj[4]="Nữ";
+            }
+            else{
+                obj[4]="Nam";
+            }
+
+            obj[5]=s.getBirthday();
+            obj[6]=s.getAddress();
+            i++;
+            dtm.addRow(obj);
+        }
+
+
+        return dtm;
+    }
+    public DefaultTableModel setTableStudent(ArrayList<StudentEntity> listItem, String[] listColumn) {
+        int columns = listColumn.length;
+        DefaultTableModel dtm = new DefaultTableModel() {
+            @Override
+            public boolean isCellEditable(int rowIndex, int colIndex) {
+                return false;
+            }
+
+            @Override
+            public Class<?> getColumnClass(int columnIndex) {
+                return String.class;
+            }
+        };
+        dtm.setColumnIdentifiers(listColumn);
+        Object[] obj;
+        int i=1;
+        for(StudentEntity s:listItem){
+            obj=new Object[columns];
+            obj[0] = i;
+            obj[1] =s.getMssv();
+            obj[2]=s.getUsername();
+            obj[4] = s.getFullname();
+            obj[3] = s.getPassword();
+            if (s.getGender()==0){
+                obj[5]="Nữ";
+            }
+            else{
+                obj[5]="Nam";
+            }
+            String subject="";
+            obj[6]=s.getBirthday();
+            obj[7]=s.getAddress();
+            Set<RegistrationEntity> hp=s.getRegistered();
+            for( RegistrationEntity registered: hp){
+                subject+=registered.getCourse().getSubject().getSubjectname();
+                subject+=",";
+            }
+            obj[8]=subject;
+            i++;
+            dtm.addRow(obj);
         }
 
 

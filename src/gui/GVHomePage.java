@@ -27,14 +27,15 @@ public class GVHomePage extends javax.swing.JFrame {
     public static String thongBaoMatKhau = "";
     public GVHomePage() {
         initComponents();
+        setUser();
         List<DanhMuc> listDanhMuc = new ArrayList<>();
         listDanhMuc.add(new DanhMuc("AccountGV", jPnAccount, jLbAccount));
         listDanhMuc.add(new DanhMuc("TKGV", jPnGV, jLbGV));
-
+        listDanhMuc.add(new DanhMuc("QLSV",jPnHS,jLbHS));
         ScreenController controller = new ScreenController(jPnView);
-        controller.setDashboard(jPnAccount, jLbAccount);
+        //controller.setDashboard(jPnAccount, jLbAccount);
         controller.setEvent(listDanhMuc);
-        setUser();
+
     }
     private void setUser() {
         MinitryEntity st= MinitryDAO.getMinitrybyUsername(Login.nameLogin);

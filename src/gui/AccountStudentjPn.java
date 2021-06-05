@@ -14,8 +14,13 @@
 package gui;
 
 
+import dao.MinitryDAO;
 import dao.StudentDAO;
+import pojo.MinitryEntity;
 import pojo.StudentEntity;
+
+import javax.swing.*;
+import java.sql.Date;
 
 
 public class AccountStudentjPn extends javax.swing.JPanel {
@@ -30,11 +35,12 @@ public class AccountStudentjPn extends javax.swing.JPanel {
     }
 
     public void setInforStudent() {
+        st = StudentDAO.getStudentbyUsername(HomePageStudent.nameLogin);
         jTFName.setText(st.getFullname());
         jTFName.setEnabled(false);
         jTFMSSV.setText(st.getMssv());
         jTFMSSV.setEnabled(false);
-        jTFUsername.setText(st.getUsername());
+        jTFUsername.setText(st.getClass().getName());
         jTFUsername.setEnabled(false);
         jTAAddress.setText(st.getAddress());
         jTAAddress.setEnabled(false);
@@ -60,6 +66,9 @@ public class AccountStudentjPn extends javax.swing.JPanel {
     }
 
     public void setBtnUpdate() {
+        jPFnewpass.setText("");
+        jPFoldpass.setText("");
+        jTFrepass.setText("");
         jTFName.setEnabled(true);
         jTFUsername.setEnabled(false);
         jTFMSSV.setEnabled(false);
@@ -160,7 +169,7 @@ public class AccountStudentjPn extends javax.swing.JPanel {
         jLabel4.setText("MSSV:");
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel3.setText("Username:");
+        jLabel3.setText("Lớp:");
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel5.setText("Ngày sinh:");
@@ -281,7 +290,7 @@ public class AccountStudentjPn extends javax.swing.JPanel {
         layout.setHorizontalGroup(
                 layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(layout.createSequentialGroup()
-                                .addGap(50, 50, 50)
+                                .addGap(70, 70, 70)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addComponent(jLabel4)
                                         .addComponent(jLabel3)
@@ -406,10 +415,12 @@ public class AccountStudentjPn extends javax.swing.JPanel {
 
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
+        updateInformation();
     }
 
     private void btnSavePassActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
+        updatePassword();
     }
 
     private void jTFNameKeyReleased(java.awt.event.KeyEvent evt) {
@@ -432,7 +443,7 @@ public class AccountStudentjPn extends javax.swing.JPanel {
 
     private void jAddressKeyReleased(java.awt.event.KeyEvent evt) {
         if (evt.getKeyCode() == evt.VK_ENTER) {
-            ////////////
+            updateInformation();
         }
     }
 
@@ -450,11 +461,80 @@ public class AccountStudentjPn extends javax.swing.JPanel {
 
     private void jRepassKeyReleased(java.awt.event.KeyEvent evt) {
         if (evt.getKeyCode() == evt.VK_ENTER) {
-            ////////////
+            updatePassword();
         }
     }
+    private  void updateInformation(){
+        if(updateInfor()){
+            JOptionPane.showMessageDialog(null, "Cập nhật thông tn thành công");
+            setInforStudent();
+        }
+        else{
+            JOptionPane.showMessageDialog(null, "Cập nhật thất bại!");
+        }
+    }
+    private boolean updateInfor(){
+        StudentEntity newU=st;
+        String name=jTFName.getText();
+        java.util.Date date= jDCBirthday.getDate();
+        Date date1=new Date(date.getYear(),date.getMonth(),date.getDate());
+        int gender=jCBgender.getSelectedIndex();
+        String address=jTAAddress.getText();
+        if(name.length()==0||address.length()==0){
+            JOptionPane.showMessageDialog(null, "Tên và Địa chỉ không để trống!");
+            return false;
+        }
+        newU.setAddress(address);
+        newU.setFullname(name);
+        newU.setGender(gender);
+        newU.setBirthday(date1);
 
-
+        return StudentDAO.updateStudent(newU);
+    }
+    private void updatePassword(){
+        if(updatePass()==true){
+            JOptionPane.showMessageDialog(null, "Cập nhật password thành công!");
+            jPFnewpass.setText("");
+            jPFoldpass.setText("");
+            jTFrepass.setText("");
+        }
+        else{
+            jPFnewpass.setText("");
+            jPFoldpass.setText("");
+            jTFrepass.setText("");
+        }
+    }
+    private boolean updatePass(){
+        StudentEntity newPass=st;
+        String oldpass=jPFoldpass.getText();
+        String newpass=jPFnewpass.getText();
+        String repass=jTFrepass.getText();
+        System.out.println(oldpass);
+        System.out.println(st.getPassword());
+        if(oldpass.length()==0||newpass.length()==0||repass.length()==0){
+            JOptionPane.showMessageDialog(null, "Mật khẩu mới, Mật khẩu cũ và Nhập lại mật khẩu không được trống !");
+            return false;
+        }
+        if(newPass.getPassword().equals(oldpass)==false){
+            JOptionPane.showMessageDialog(null, "Mật khẩu cũ không trùng khớp !");
+            return false;
+        }
+        if(newpass.equals(repass)==false){
+            JOptionPane.showMessageDialog(null, "Nhập lại mật khẩu không trùng khớp mật khẩu mới !");
+            return false;
+        }
+        if(newpass.equals(oldpass)){
+            JOptionPane.showMessageDialog(null, "Mật khẩu mới và cũ trùng nhau!");
+            return false;
+        }
+        if(newpass.length()<4){
+            JOptionPane.showMessageDialog(null, "Mật khẩu nên lớn hơn 3 ký tự !");
+            return false;
+        }
+        newPass.setPassword(newpass);
+        System.out.println(newPass.getPassword());
+        return StudentDAO.updateStudent(newPass);
+    }
     // Variables declaration - do not modify
     private javax.swing.JButton btnChangPass;
     private javax.swing.JButton btnSave;
