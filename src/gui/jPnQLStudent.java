@@ -501,6 +501,8 @@ public class jPnQLStudent extends javax.swing.JPanel {
         jTFmssv.setText("");
         jTASubject.setText("");
         jTFUserame.setEnabled(false);
+        btnReset.setEnabled(false);
+        btnEdit.setEnabled(false);
     }
 
     public void edit() {

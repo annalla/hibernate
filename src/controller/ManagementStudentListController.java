@@ -34,16 +34,16 @@ public class ManagementStudentListController {
     private JComboBox jCBgender;
     private JTextArea jaddress;
     private JDateChooser jBirth;
-    private  JComboBox jClass;
+    private JComboBox jClass;
     private JTextField jTFmssv;
-    private  JTextArea jSubject;
+    private JTextArea jSubject;
     private JLabel id;
 
     private ClassTableModel classTableModel = null;
     private TableRowSorter<TableModel> rowSorter = null;
 
 
-    private final String[] COLUMNSMinitry = {"STT", "MSSV","Lớp","Username", "Password", "Họ tên", "Giới tính", "Ngày sinh", "Địa chỉ","Môn học"};
+    private final String[] COLUMNSMinitry = {"STT", "MSSV", "Lớp", "Username", "Password", "Họ tên", "Giới tính", "Ngày sinh", "Địa chỉ", "Môn học"};
 
     //    private TableRowSorter<TableModel> rowSorter = null;
     public ManagementStudentListController(JPanel jPnView, JTextField jtfSearchh) {
@@ -53,7 +53,7 @@ public class ManagementStudentListController {
 
     }
 
-    public void setField(JButton btnfind, JButton btnreset, JButton btnupdate, JTextField username, JTextField name, JComboBox gender, JTextArea address, JDateChooser birth, JLabel id,JTextField mssv,JComboBox classs,JTextArea subject) {
+    public void setField(JButton btnfind, JButton btnreset, JButton btnupdate, JTextField username, JTextField name, JComboBox gender, JTextArea address, JDateChooser birth, JLabel id, JTextField mssv, JComboBox classs, JTextArea subject) {
         this.btnFind = btnfind;
         this.btnReset = btnreset;
         this.btnUpdate = btnupdate;
@@ -63,15 +63,16 @@ public class ManagementStudentListController {
         this.jTFName = name;
         this.jBirth = birth;
         this.id = id;
-        this.jClass=classs;
-        this.jTFmssv=mssv;
-        this.jSubject=subject;
+        this.jClass = classs;
+        this.jTFmssv = mssv;
+        this.jSubject = subject;
     }
-    public void setDatatoTableStudentbyClass(String name,String[] CBclass){
-        ClazzEntity clazz=ClassDAO.getClassbyClassname(name);
-        Set<StudentEntity> st=clazz.getStudents();
-        ArrayList<StudentEntity> list= new ArrayList<>();
-        for (StudentEntity s:st){
+
+    public void setDatatoTableStudentbyClass(String name, String[] CBclass) {
+        ClazzEntity clazz = ClassDAO.getClassbyClassname(name);
+        Set<StudentEntity> st = clazz.getStudents();
+        ArrayList<StudentEntity> list = new ArrayList<>();
+        for (StudentEntity s : st) {
             list.add(s);
         }
         DefaultTableModel model = classTableModel.setTableStudent(list, COLUMNSMinitry);
@@ -112,7 +113,7 @@ public class ManagementStudentListController {
                     DefaultTableModel model = (DefaultTableModel) table.getModel();
                     int selectedRowIndex = table.getSelectedRow();
                     selectedRowIndex = table.convertRowIndexToModel(selectedRowIndex);
-                    jTFmssv.setText(model.getValueAt(selectedRowIndex,1).toString());
+                    jTFmssv.setText(model.getValueAt(selectedRowIndex, 1).toString());
                     String username = model.getValueAt(selectedRowIndex, 3).toString();
                     jTFUsername.setText(username);
                     jTFName.setText(model.getValueAt(selectedRowIndex, 5).toString());
@@ -126,12 +127,12 @@ public class ManagementStudentListController {
                     jCBgender.setSelectedIndex(gender);
                     jBirth.setDate((Date) model.getValueAt(selectedRowIndex, 7));
                     jaddress.setText(model.getValueAt(selectedRowIndex, 8).toString());
-                    jSubject.setText(model.getValueAt(selectedRowIndex,9).toString());
-                    String cl=model.getValueAt(selectedRowIndex,2).toString();
+                    jSubject.setText(model.getValueAt(selectedRowIndex, 9).toString());
+                    String cl = model.getValueAt(selectedRowIndex, 2).toString();
                     //List<ClazzEntity> Classlist= ClassDAO.getClassList();
                     //int i=0;
-                    for(int i=0;i<CBclass.length;i++){
-                        if(CBclass[i].equals(cl)){
+                    for (int i = 0; i < CBclass.length; i++) {
+                        if (CBclass[i].equals(cl)) {
                             jClass.setSelectedIndex(i);
                             break;
                         }
@@ -177,6 +178,7 @@ public class ManagementStudentListController {
         jPnView.validate();
         jPnView.repaint();
     }
+
     public void setDataToTableStudent(String[] CBclass) {
         ArrayList<StudentEntity> list = (ArrayList<StudentEntity>) StudentDAO.getStudentList();
 
@@ -215,10 +217,10 @@ public class ManagementStudentListController {
             @Override
             public void mouseClicked(MouseEvent e) {
                 if (e.getClickCount() == 1 & table.getSelectedRow() != -1) {
-                   DefaultTableModel model = (DefaultTableModel) table.getModel();
+                    DefaultTableModel model = (DefaultTableModel) table.getModel();
                     int selectedRowIndex = table.getSelectedRow();
                     selectedRowIndex = table.convertRowIndexToModel(selectedRowIndex);
-                    jTFmssv.setText(model.getValueAt(selectedRowIndex,1).toString());
+                    jTFmssv.setText(model.getValueAt(selectedRowIndex, 1).toString());
                     String username = model.getValueAt(selectedRowIndex, 3).toString();
                     jTFUsername.setText(username);
                     jTFName.setText(model.getValueAt(selectedRowIndex, 5).toString());
@@ -232,12 +234,12 @@ public class ManagementStudentListController {
                     jCBgender.setSelectedIndex(gender);
                     jBirth.setDate((Date) model.getValueAt(selectedRowIndex, 7));
                     jaddress.setText(model.getValueAt(selectedRowIndex, 8).toString());
-                    jSubject.setText(model.getValueAt(selectedRowIndex,9).toString());
-                    String cl=model.getValueAt(selectedRowIndex,2).toString();
+                    jSubject.setText(model.getValueAt(selectedRowIndex, 9).toString());
+                    String cl = model.getValueAt(selectedRowIndex, 2).toString();
                     //List<ClazzEntity> Classlist= ClassDAO.getClassList();
                     //int i=0;
-                    for(int i=0;i<CBclass.length;i++){
-                        if(CBclass[i].equals(cl)){
+                    for (int i = 0; i < CBclass.length; i++) {
+                        if (CBclass[i].equals(cl)) {
                             jClass.setSelectedIndex(i);
                             break;
                         }

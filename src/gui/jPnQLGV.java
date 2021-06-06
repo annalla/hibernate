@@ -372,6 +372,9 @@ public class jPnQLGV extends javax.swing.JPanel {
         jBCgender.setSelectedIndex(0);
         jDCbirth.setCalendar(null);
         labelId.setText("");
+        btnDelete.setEnabled(false);
+        btnEdit.setEnabled(false);
+        btnReset.setEnabled(false);
     }
 
     public void edit() {

@@ -4,6 +4,7 @@ import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
+import pojo.StudentEntity;
 import pojo.SubjectEntity;
 import util.HibernateUtil;
 
@@ -25,7 +26,7 @@ public class SubjectDAO {
         }
         return ds;
     }
-    public static SubjectEntity getSubject(String subjectId) {
+    public static SubjectEntity getSubject(int subjectId) {
         SubjectEntity sv = null;
         Session session = HibernateUtil.getSessionFactory().openSession();
         try {
@@ -38,9 +39,26 @@ public class SubjectDAO {
         }
         return sv;
     }
+    public static SubjectEntity getSujectbyID(String id) {
+        SubjectEntity st = null;
+        Session session = HibernateUtil.getSessionFactory()
+                .openSession();
+        try {
+            String hql = "select m from SubjectEntity m where m.subjectId =:id";
+            Query query = session.createQuery(hql);
+            query.setString("id",id);
+            st=(SubjectEntity) query.uniqueResult();
+        } catch (HibernateException ex) {
+//Log the exception
+            System.err.println(ex);
+        } finally {
+            session.close();
+        }
+        return st;
+    }
     public static boolean addSubject(SubjectEntity sv) {
         Session session = HibernateUtil.getSessionFactory().openSession();
-        if (SubjectDAO.getSubject(sv.getSubjectId())!=null) {
+        if (SubjectDAO.getSubject(sv.getSubId())!=null) {
             return false;
         }
         Transaction transaction = null;
@@ -59,7 +77,7 @@ public class SubjectDAO {
     }
     public static boolean updateSubject(SubjectEntity sv) {
         Session session = HibernateUtil.getSessionFactory().openSession();
-        if (SubjectDAO.getSubject(sv.getSubjectId()) == null) {
+        if (SubjectDAO.getSubject(sv.getSubId()) == null) {
             return false;
         }
         Transaction transaction = null;
@@ -78,7 +96,7 @@ public class SubjectDAO {
     }
     public static boolean deleteSubject(SubjectEntity sv) {
         Session session = HibernateUtil.getSessionFactory().openSession();
-        if (SubjectDAO.getSubject(sv.getSubjectId()) == null) {
+        if (SubjectDAO.getSubject(sv.getSubId()) == null) {
             return false;
         }
         Transaction transaction = null;

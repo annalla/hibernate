@@ -71,6 +71,9 @@ public class ScreenController {
                 case "QLSV":
                     node =new jPnQLStudent();
                     break;
+                case "QLMH":
+                    node =new jPnQLSubject();
+                    break;
                 default:
                     break;
             }

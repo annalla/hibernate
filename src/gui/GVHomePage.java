@@ -32,6 +32,8 @@ public class GVHomePage extends javax.swing.JFrame {
         listDanhMuc.add(new DanhMuc("AccountGV", jPnAccount, jLbAccount));
         listDanhMuc.add(new DanhMuc("TKGV", jPnGV, jLbGV));
         listDanhMuc.add(new DanhMuc("QLSV",jPnHS,jLbHS));
+        listDanhMuc.add(new DanhMuc("QLMH",jPnMH,jLbMH));
+
         ScreenController controller = new ScreenController(jPnView);
         //controller.setDashboard(jPnAccount, jLbAccount);
         controller.setEvent(listDanhMuc);

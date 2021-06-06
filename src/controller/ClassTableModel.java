@@ -5,11 +5,40 @@ package controller;
 import pojo.*;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 import javax.swing.table.DefaultTableModel;
 
 
 public class ClassTableModel {
+    public static DefaultTableModel setTableSubject(ArrayList<SubjectEntity> listItem, String[] listColumn) {
+        int columns = listColumn.length;
+        DefaultTableModel dtm = new DefaultTableModel() {
+            @Override
+            public boolean isCellEditable(int rowIndex, int colIndex) {
+                return false;
+            }
+
+            @Override
+            public Class<?> getColumnClass(int columnIndex) {
+                return String.class;
+            }
+        };
+        dtm.setColumnIdentifiers(listColumn);
+        Object[] obj;
+        int i=1;
+        for(SubjectEntity s:listItem){
+            obj=new Object[columns];
+            obj[0] = i;
+            obj[1] =s.getSubjectId();
+            obj[2] = s.getSubjectname();
+            obj[3] = s.getCredit();
+            i++;
+            dtm.addRow(obj);
+
+        }
+        return dtm;
+    }
     public DefaultTableModel setTableCourse(ArrayList<RegistrationEntity> listItem, String[] listColumn) {
         int columns = listColumn.length;
         DefaultTableModel dtm = new DefaultTableModel() {
