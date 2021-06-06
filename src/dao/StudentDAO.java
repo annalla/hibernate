@@ -76,4 +76,42 @@ public class StudentDAO {
         }
         return true;
     }
+    public static boolean deleteStudent(StudentEntity sv) {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        if (StudentDAO.getStudentbyId(sv.getStudentId()) == null) {
+            return false;
+        }
+        Transaction transaction = null;
+        try {
+            transaction = session.beginTransaction();
+            session.delete(sv);
+            transaction.commit();
+        } catch (HibernateException ex) {
+//Log the exception
+            transaction.rollback();
+            System.err.println(ex);
+        } finally {
+            session.close();
+        }
+        return true;
+    }
+    public static boolean addStudent(StudentEntity sv) {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        if (StudentDAO.getStudentbyId(sv.getStudentId()) != null) {
+            return false;
+        }
+        Transaction transaction = null;
+        try {
+            transaction = session.beginTransaction();
+            session.save(sv);
+            transaction.commit();
+        } catch (HibernateException ex) {
+//Log the exception
+            transaction.rollback();
+            System.err.println(ex);
+        } finally {
+            session.close();
+        }
+        return true;
+    }
 }

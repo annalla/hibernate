@@ -138,24 +138,25 @@ public class ClassTableModel {
             obj=new Object[columns];
             obj[0] = i;
             obj[1] =s.getMssv();
-            obj[2]=s.getUsername();
-            obj[4] = s.getFullname();
-            obj[3] = s.getPassword();
+            obj[2]=s.getClasss().getClassname();
+            obj[3]=s.getUsername();
+            obj[5] = s.getFullname();
+            obj[4] = s.getPassword();
             if (s.getGender()==0){
-                obj[5]="Nữ";
+                obj[6]="Nữ";
             }
             else{
-                obj[5]="Nam";
+                obj[6]="Nam";
             }
             String subject="";
-            obj[6]=s.getBirthday();
-            obj[7]=s.getAddress();
+            obj[7]=s.getBirthday();
+            obj[8]=s.getAddress();
             Set<RegistrationEntity> hp=s.getRegistered();
             for( RegistrationEntity registered: hp){
                 subject+=registered.getCourse().getSubject().getSubjectname();
                 subject+=",";
             }
-            obj[8]=subject;
+            obj[9]=subject;
             i++;
             dtm.addRow(obj);
         }

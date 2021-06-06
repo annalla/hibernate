@@ -348,6 +348,7 @@ public class jPnQLGV extends javax.swing.JPanel {
     }
 
     private void btnClearActionPerformed(java.awt.event.ActionEvent evt) {
+
         setClear();
         // TODO add your handling code here:
     }
@@ -356,9 +357,11 @@ public class jPnQLGV extends javax.swing.JPanel {
         if(MinitryDAO.deleteMinitry(MinitryDAO.getInforMinitry(id))){
             JOptionPane.showMessageDialog(null, "Xóa thành công!");
             setData();
+            setClear();
             return;
         }
         JOptionPane.showMessageDialog(null, "Xóa không thành công!");
+        setClear();
 
     }
     public void setClear() {
@@ -368,6 +371,7 @@ public class jPnQLGV extends javax.swing.JPanel {
         jTFUserame.requestFocus();
         jBCgender.setSelectedIndex(0);
         jDCbirth.setCalendar(null);
+        labelId.setText("");
     }
 
     public void edit() {
@@ -396,6 +400,7 @@ public class jPnQLGV extends javax.swing.JPanel {
         if (MinitryDAO.updateMinitry(minitry)) {
             JOptionPane.showMessageDialog(null, "Cập nhật thành công!");
             setData();
+            setClear();
             return;
         }
         JOptionPane.showMessageDialog(null, "Cập nhật không thành công!");
@@ -410,6 +415,7 @@ public class jPnQLGV extends javax.swing.JPanel {
         if (MinitryDAO.updateMinitry(minitryEntity)) {
             JOptionPane.showMessageDialog(null, "Reset password thành công!");
             setData();
+            setClear();
         } else {
             JOptionPane.showMessageDialog(null, "Reset password thất bại!");
         }
@@ -443,6 +449,7 @@ public class jPnQLGV extends javax.swing.JPanel {
         if (MinitryDAO.addMinitry(minitry)) {
             JOptionPane.showMessageDialog(null, "Thêm tài khoản giáo vụ thành công!");
             setData();
+            setClear();
             return;
         }
         JOptionPane.showMessageDialog(null, "Trùng tài khoản giáo vụ. Vui lòng kiểm tra lại!");
