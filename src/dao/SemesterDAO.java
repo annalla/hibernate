@@ -4,18 +4,18 @@ import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
-import pojo.MinitryEntity;
-import pojo.StudentEntity;
+import pojo.SemesterEntity;
+import pojo.SubjectEntity;
 import util.HibernateUtil;
 
 import java.util.List;
 
-public class StudentDAO {
-    public static List<StudentEntity> getStudentList() {
-        List<StudentEntity> ds = null;
+public class SemesterDAO {
+    public static List<SemesterEntity> getSemesterList() {
+        List<SemesterEntity> ds = null;
         Session session = HibernateUtil.getSessionFactory().openSession();
         try {
-            String hql = "select m from StudentEntity m";
+            String hql = "select m from SemesterEntity m";
             Query query = session.createQuery(hql);
             ds = query.list();
         } catch (HibernateException ex) {
@@ -27,31 +27,30 @@ public class StudentDAO {
         return ds;
     }
 
-    public static StudentEntity getStudentbyId(int student) {
-        StudentEntity sach = null;
-        Session session = HibernateUtil.getSessionFactory()
-                .openSession();
+    public static SemesterEntity getSemester(int semesterId) {
+        SemesterEntity sv = null;
+        Session session = HibernateUtil.getSessionFactory().openSession();
         try {
-            //int studentId=Integer.parseInt(student);
-            sach = (StudentEntity) session.get(StudentEntity.class, student);
+            sv = (SemesterEntity) session.get(SemesterEntity.class, semesterId);
         } catch (HibernateException ex) {
 //Log the exception
             System.err.println(ex);
         } finally {
             session.close();
         }
-        return sach;
+        return sv;
     }
 
-    public static StudentEntity getStudentbyUsername(String username) {
-        StudentEntity st = null;
+    public static SemesterEntity getSemesterbyYearandName(String name, String year) {
+        SemesterEntity st = null;
         Session session = HibernateUtil.getSessionFactory()
                 .openSession();
         try {
-            String hql = "select m from StudentEntity m where m.username =:username";
+            String hql = "select m from SemesterEntity m where m.year =:year and m.term=:name";
             Query query = session.createQuery(hql);
-            query.setString("username", username);
-            st = (StudentEntity) query.uniqueResult();
+            query.setString("year", year);
+            query.setString("name", name);
+            st = (SemesterEntity) query.uniqueResult();
         } catch (HibernateException ex) {
 //Log the exception
             System.err.println(ex);
@@ -61,9 +60,29 @@ public class StudentDAO {
         return st;
     }
 
-    public static boolean updateStudent(StudentEntity sv) {
+    public static boolean addSesmester(SemesterEntity sv) {
         Session session = HibernateUtil.getSessionFactory().openSession();
-        if (StudentDAO.getStudentbyId(sv.getStudentId()) == null) {
+        if (SemesterDAO.getSemesterbyYearandName(sv.getTerm(), sv.getYear()) != null) {
+            return false;
+        }
+        Transaction transaction = null;
+        try {
+            transaction = session.beginTransaction();
+            session.save(sv);
+            transaction.commit();
+        } catch (HibernateException ex) {
+//Log the exception
+            transaction.rollback();
+            System.err.println(ex);
+        } finally {
+            session.close();
+        }
+        return true;
+    }
+
+    public static boolean updateSemester(SemesterEntity sv) {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        if (SemesterDAO.getSemester(sv.getSemesterId()) == null) {
             return false;
         }
         Transaction transaction = null;
@@ -81,35 +100,15 @@ public class StudentDAO {
         return true;
     }
 
-    public static boolean deleteStudent(StudentEntity sv) {
+    public static boolean deleteSemester(SemesterEntity sv) {
         Session session = HibernateUtil.getSessionFactory().openSession();
-        if (StudentDAO.getStudentbyId(sv.getStudentId()) == null) {
+        if (SemesterDAO.getSemester(sv.getSemesterId()) == null) {
             return false;
         }
         Transaction transaction = null;
         try {
             transaction = session.beginTransaction();
             session.delete(sv);
-            transaction.commit();
-        } catch (HibernateException ex) {
-//Log the exception
-            transaction.rollback();
-            System.err.println(ex);
-        } finally {
-            session.close();
-        }
-        return true;
-    }
-
-    public static boolean addStudent(StudentEntity sv) {
-        Session session = HibernateUtil.getSessionFactory().openSession();
-        if (StudentDAO.getStudentbyUsername(sv.getUsername()) != null) {
-            return false;
-        }
-        Transaction transaction = null;
-        try {
-            transaction = session.beginTransaction();
-            session.save(sv);
             transaction.commit();
         } catch (HibernateException ex) {
 //Log the exception

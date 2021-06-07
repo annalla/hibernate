@@ -56,9 +56,10 @@ public class SubjectDAO {
         }
         return st;
     }
+
     public static boolean addSubject(SubjectEntity sv) {
         Session session = HibernateUtil.getSessionFactory().openSession();
-        if (SubjectDAO.getSubject(sv.getSubId())!=null) {
+        if (SubjectDAO.getSujectbyID(sv.getSubjectId()) != null) {
             return false;
         }
         Transaction transaction = null;
@@ -75,6 +76,7 @@ public class SubjectDAO {
         }
         return true;
     }
+
     public static boolean updateSubject(SubjectEntity sv) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         if (SubjectDAO.getSubject(sv.getSubId()) == null) {
@@ -94,6 +96,7 @@ public class SubjectDAO {
         }
         return true;
     }
+
     public static boolean deleteSubject(SubjectEntity sv) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         if (SubjectDAO.getSubject(sv.getSubId()) == null) {

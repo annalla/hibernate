@@ -1,7 +1,6 @@
 package controller;
 
 
-
 import pojo.*;
 
 import java.util.ArrayList;
@@ -11,6 +10,67 @@ import javax.swing.table.DefaultTableModel;
 
 
 public class ClassTableModel {
+    public static DefaultTableModel setTableClass(ArrayList<ClazzEntity> listItem, String[] listColumn) {
+        int columns = listColumn.length;
+        DefaultTableModel dtm = new DefaultTableModel() {
+            @Override
+            public boolean isCellEditable(int rowIndex, int colIndex) {
+                return false;
+            }
+
+            @Override
+            public Class<?> getColumnClass(int columnIndex) {
+                return String.class;
+            }
+        };
+        dtm.setColumnIdentifiers(listColumn);
+        Object[] obj;
+        int i = 1;
+        for (ClazzEntity s : listItem) {
+            obj = new Object[columns];
+            obj[0] = i;
+            obj[1] = s.getClassname();
+            obj[2] = s.getTotal();
+            obj[3] = s.getBoy();
+            obj[3] = s.getGirl();
+            i++;
+            dtm.addRow(obj);
+
+        }
+        return dtm;
+    }
+
+    public static DefaultTableModel setTableSemester(ArrayList<SemesterEntity> listItem, String[] listColumn) {
+        int columns = listColumn.length;
+        DefaultTableModel dtm = new DefaultTableModel() {
+            @Override
+            public boolean isCellEditable(int rowIndex, int colIndex) {
+                return false;
+            }
+
+            @Override
+            public Class<?> getColumnClass(int columnIndex) {
+                return String.class;
+            }
+        };
+        dtm.setColumnIdentifiers(listColumn);
+        Object[] obj;
+        int i = 1;
+        for (SemesterEntity s : listItem) {
+            obj = new Object[columns];
+            obj[0] = i;
+            obj[1] = s.getTerm();
+            obj[2] = s.getYear();
+            obj[3] = s.getStartsemester();
+            obj[4] = s.getEndsemester();
+            obj[5] = s.getIspresent();
+            i++;
+            dtm.addRow(obj);
+
+        }
+        return dtm;
+    }
+
     public static DefaultTableModel setTableSubject(ArrayList<SubjectEntity> listItem, String[] listColumn) {
         int columns = listColumn.length;
         DefaultTableModel dtm = new DefaultTableModel() {
@@ -26,11 +86,11 @@ public class ClassTableModel {
         };
         dtm.setColumnIdentifiers(listColumn);
         Object[] obj;
-        int i=1;
-        for(SubjectEntity s:listItem){
-            obj=new Object[columns];
+        int i = 1;
+        for (SubjectEntity s : listItem) {
+            obj = new Object[columns];
             obj[0] = i;
-            obj[1] =s.getSubjectId();
+            obj[1] = s.getSubjectId();
             obj[2] = s.getSubjectname();
             obj[3] = s.getCredit();
             i++;
@@ -39,6 +99,7 @@ public class ClassTableModel {
         }
         return dtm;
     }
+
     public DefaultTableModel setTableCourse(ArrayList<RegistrationEntity> listItem, String[] listColumn) {
         int columns = listColumn.length;
         DefaultTableModel dtm = new DefaultTableModel() {
@@ -54,61 +115,62 @@ public class ClassTableModel {
         };
         dtm.setColumnIdentifiers(listColumn);
         Object[] obj;
-        int i=1;
-        for(RegistrationEntity s:listItem){
-            obj=new Object[columns];
-            CourseEntity course=s.getCourse();
-            SubjectEntity subject=course.getSubject();
+        int i = 1;
+        for (RegistrationEntity s : listItem) {
+            obj = new Object[columns];
+            CourseEntity course = s.getCourse();
+            SubjectEntity subject = course.getSubject();
             obj[0] = i;
-            obj[1] =subject.getSubjectId();
+            obj[1] = subject.getSubjectId();
             obj[2] = subject.getSubjectname();
             obj[3] = subject.getCredit();
-            String lh="";
-            switch (course.getDay()){
+            String lh = "";
+            switch (course.getDay()) {
                 case 1:
-                    lh+="T2,";
+                    lh += "T2,";
                     break;
                 case 2:
-                    lh+="T3,";
+                    lh += "T3,";
                     break;
                 case 3:
-                    lh+="T4,";
+                    lh += "T4,";
                     break;
                 case 4:
-                    lh+="T5,";
+                    lh += "T5,";
                     break;
                 case 5:
-                    lh+="T6,";
+                    lh += "T6,";
                     break;
                 case 6:
-                    lh+="T7,";
+                    lh += "T7,";
                     break;
                 case 7:
-                    lh+="CN,";
+                    lh += "CN,";
                     break;
             }
-            switch (course.getPeriod()){
+            switch (course.getPeriod()) {
                 case 1:
-                    lh+="7:30-9:30,";
+                    lh += "7:30-9:30,";
                     break;
                 case 2:
-                    lh+="9:30-11:30,";
+                    lh += "9:30-11:30,";
                     break;
                 case 3:
-                    lh+="13:30-15:30,";
+                    lh += "13:30-15:30,";
                     break;
                 case 4:
-                    lh+="15:30-17:30,";
+                    lh += "15:30-17:30,";
                     break;
             }
-            lh+= course.getRoom();
-            obj[4]=lh;
+            lh += course.getRoom();
+            obj[4] = lh;
             i++;
             dtm.addRow(obj);
 
         }
         return dtm;
     }
+
     public DefaultTableModel setTableMinitry(ArrayList<MinitryEntity> listItem, String[] listColumn) {
         int columns = listColumn.length;
         DefaultTableModel dtm = new DefaultTableModel() {
@@ -124,22 +186,21 @@ public class ClassTableModel {
         };
         dtm.setColumnIdentifiers(listColumn);
         Object[] obj;
-        int i=1;
-        for(MinitryEntity s:listItem){
-            obj=new Object[columns];
+        int i = 1;
+        for (MinitryEntity s : listItem) {
+            obj = new Object[columns];
             obj[0] = i;
-            obj[1] =s.getUsername();
+            obj[1] = s.getUsername();
             obj[3] = s.getFullname();
             obj[2] = s.getPassword();
-            if (s.getGender()==0){
-                obj[4]="Nữ";
-            }
-            else{
-                obj[4]="Nam";
+            if (s.getGender() == 0) {
+                obj[4] = "Nữ";
+            } else {
+                obj[4] = "Nam";
             }
 
-            obj[5]=s.getBirthday();
-            obj[6]=s.getAddress();
+            obj[5] = s.getBirthday();
+            obj[6] = s.getAddress();
             i++;
             dtm.addRow(obj);
         }
@@ -147,6 +208,7 @@ public class ClassTableModel {
 
         return dtm;
     }
+
     public DefaultTableModel setTableStudent(ArrayList<StudentEntity> listItem, String[] listColumn) {
         int columns = listColumn.length;
         DefaultTableModel dtm = new DefaultTableModel() {
@@ -162,30 +224,29 @@ public class ClassTableModel {
         };
         dtm.setColumnIdentifiers(listColumn);
         Object[] obj;
-        int i=1;
-        for(StudentEntity s:listItem){
-            obj=new Object[columns];
+        int i = 1;
+        for (StudentEntity s : listItem) {
+            obj = new Object[columns];
             obj[0] = i;
-            obj[1] =s.getMssv();
-            obj[2]=s.getClasss().getClassname();
-            obj[3]=s.getUsername();
+            obj[1] = s.getMssv();
+            obj[2] = s.getClasss().getClassname();
+            obj[3] = s.getUsername();
             obj[5] = s.getFullname();
             obj[4] = s.getPassword();
-            if (s.getGender()==0){
-                obj[6]="Nữ";
+            if (s.getGender() == 0) {
+                obj[6] = "Nữ";
+            } else {
+                obj[6] = "Nam";
             }
-            else{
-                obj[6]="Nam";
+            String subject = "";
+            obj[7] = s.getBirthday();
+            obj[8] = s.getAddress();
+            Set<RegistrationEntity> hp = s.getRegistered();
+            for (RegistrationEntity registered : hp) {
+                subject += registered.getCourse().getSubject().getSubjectname();
+                subject += ",";
             }
-            String subject="";
-            obj[7]=s.getBirthday();
-            obj[8]=s.getAddress();
-            Set<RegistrationEntity> hp=s.getRegistered();
-            for( RegistrationEntity registered: hp){
-                subject+=registered.getCourse().getSubject().getSubjectname();
-                subject+=",";
-            }
-            obj[9]=subject;
+            obj[9] = subject;
             i++;
             dtm.addRow(obj);
         }

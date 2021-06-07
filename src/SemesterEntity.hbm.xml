@@ -13,7 +13,7 @@
             <column name="term" sql-type="varchar(50)" length="50"/>
         </property>
         <property name="year">
-            <column name="year" sql-type="integer"/>
+            <column name="year" sql-type="varchar(9)" length="9"/>
         </property>
         <property name="startsemester">
             <column name="startsemester" sql-type="date"/>

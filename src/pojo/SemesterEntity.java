@@ -6,7 +6,7 @@ import java.util.Objects;
 public class SemesterEntity {
     private int semesterId;
     private String term;
-    private int year;
+    private String year;
     private Date startsemester;
     private Date endsemester;
     public boolean ispresent;
@@ -35,11 +35,11 @@ public class SemesterEntity {
         this.term = term;
     }
 
-    public int getYear() {
+    public String getYear() {
         return year;
     }
 
-    public void setYear(int year) {
+    public void setYear(String year) {
         this.year = year;
     }
 
@@ -64,7 +64,7 @@ public class SemesterEntity {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         SemesterEntity that = (SemesterEntity) o;
-        return semesterId == that.semesterId && year == that.year && Objects.equals(term, that.term) && Objects.equals(startsemester, that.startsemester) && Objects.equals(endsemester, that.endsemester);
+        return semesterId == that.semesterId && Objects.equals(year, that.year) && Objects.equals(term, that.term) && Objects.equals(startsemester, that.startsemester) && Objects.equals(endsemester, that.endsemester);
     }
 
     @Override

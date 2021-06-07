@@ -15,7 +15,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- *
  * @author Xuyen
  */
 public class GVHomePage extends javax.swing.JFrame {
@@ -25,26 +24,31 @@ public class GVHomePage extends javax.swing.JFrame {
      */
     public static String nameLogin = "";
     public static String thongBaoMatKhau = "";
+
     public GVHomePage() {
         initComponents();
         setUser();
         List<DanhMuc> listDanhMuc = new ArrayList<>();
         listDanhMuc.add(new DanhMuc("AccountGV", jPnAccount, jLbAccount));
         listDanhMuc.add(new DanhMuc("TKGV", jPnGV, jLbGV));
-        listDanhMuc.add(new DanhMuc("QLSV",jPnHS,jLbHS));
-        listDanhMuc.add(new DanhMuc("QLMH",jPnMH,jLbMH));
+        listDanhMuc.add(new DanhMuc("QLSV", jPnHS, jLbHS));
+        listDanhMuc.add(new DanhMuc("QLMH", jPnMH, jLbMH));
+        listDanhMuc.add(new DanhMuc("QLHK", jPnHK, jLbHK));
+        listDanhMuc.add(new DanhMuc("QLLH", jPnLH, jLbLH));
 
         ScreenController controller = new ScreenController(jPnView);
         //controller.setDashboard(jPnAccount, jLbAccount);
         controller.setEvent(listDanhMuc);
 
     }
+
     private void setUser() {
-        MinitryEntity st= MinitryDAO.getMinitrybyUsername(Login.nameLogin);
+        MinitryEntity st = MinitryDAO.getMinitrybyUsername(Login.nameLogin);
         nameLogin = Login.nameLogin;
         jLbAccount.setText(st.getFullname());
     }
-    private StudentEntity getUser(){
+
+    private StudentEntity getUser() {
         return StudentDAO.getStudentbyUsername(Login.nameLogin);
     }
 
@@ -289,10 +293,11 @@ public class GVHomePage extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>
+
     private void btnLogoutActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
         dispose();
-        Login login =new Login();
+        Login login = new Login();
         login.setVisible(true);
     }
 
