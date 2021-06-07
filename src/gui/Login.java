@@ -231,59 +231,50 @@ public class Login extends javax.swing.JFrame {
         if (user.equals(strnull) || pass.equals(strnull)) {
             JOptionPane.showMessageDialog(null, "Tài khoản và mật khẩu không được trống !");
             this.resetForm();
-        } else{
-                boolean blean = true;
-                MinitryEntity gv= MinitryDAO.getMinitrybyUsername(user);
-                StudentEntity st= StudentDAO.getStudentbyUsername(user);
-                int type=0;
+        } else {
+            boolean blean = true;
+            MinitryEntity gv = MinitryDAO.getMinitrybyUsername(user);
+            StudentEntity st = StudentDAO.getStudentbyUsername(user);
+            int type = 0;
 
-                    String username ="";
-                    String password ="";
-                    if (gv!=null){
-                        username=gv.getUsername();
-                        password=gv.getPassword();
-                        type=1;
-                    }
-                    else if (st!=null){
-                        username=st.getUsername();
-                        password=st.getPassword();
-                        type=2;
-                    }
-                    if (user.equals(username) && pass.equals(password)&& type==1) {
+            String username = "";
+            String password = "";
+            if (gv != null) {
+                username = gv.getUsername();
+                password = gv.getPassword();
+                type = 1;
+            } else if (st != null) {
+                username = st.getUsername();
+                password = st.getPassword();
+                type = 2;
+            }
+            if (user.equals(username) && pass.equals(password) && type == 1) {
 
-                        nameLogin = username;
-                        new GVHomePage().setVisible(true);
-                        dispose();
-                        if(user.equals(pass)){
-                            JOptionPane.showMessageDialog(this, "Mật Khẩu của bạn hiện đang là mật khẩu mặc định ! Vui lòng đổi mật khẩu mới !\n","Cảnh báo mật khẩu" , JOptionPane.ERROR_MESSAGE);
+                nameLogin = username;
+                new GVHomePage().setVisible(true);
+                dispose();
+                if (user.equals(pass)) {
+                    JOptionPane.showMessageDialog(this, "Mật Khẩu của bạn hiện đang là mật khẩu mặc định ! Vui lòng đổi mật khẩu mới !\n", "Cảnh báo mật khẩu", JOptionPane.ERROR_MESSAGE);
 
-                        }
-
+                }
 
 
-                    }
-                    else
-                    if (user.equals(username) && pass.equals(password)&& type==2) {
+            } else if (user.equals(username) && pass.equals(password) && type == 2) {
 
-                        nameLogin = username;
-                        new HomePageStudent().setVisible(true);
-                        dispose();
-                        if(user.equals(pass)){
-                            JOptionPane.showMessageDialog(this, "Mật Khẩu của bạn hiện đang là mật khẩu mặc định ! Vui lòng đổi mật khẩu mới !\n","Cảnh báo mật khẩu" , JOptionPane.ERROR_MESSAGE);
+                nameLogin = username;
+                new HomePageStudent().setVisible(true);
+                dispose();
+                if (user.equals(pass)) {
+                    JOptionPane.showMessageDialog(this, "Mật Khẩu của bạn hiện đang là mật khẩu mặc định ! Vui lòng đổi mật khẩu mới !\n", "Cảnh báo mật khẩu", JOptionPane.ERROR_MESSAGE);
 
-                        }
-                    }
-                    else{
+                }
+            } else {
 
-                        JOptionPane.showMessageDialog(this, "Tên người dùng hoặc mật khẩu không hợp lệ\nXin vui lòng thử lại!", "Đăng nhập thấy bại!", JOptionPane.ERROR_MESSAGE);
-                        this.resetForm();
+                JOptionPane.showMessageDialog(this, "Tên người dùng hoặc mật khẩu không hợp lệ\nXin vui lòng thử lại!", "Đăng nhập thấy bại!", JOptionPane.ERROR_MESSAGE);
+                this.resetForm();
 
 
-                    }
-
-
-
-
+            }
 
 
         }

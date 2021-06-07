@@ -85,6 +85,7 @@ public class ManagementSemesterController {
                 throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
             }
         });
+
         table.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -114,9 +115,9 @@ public class ManagementSemesterController {
         table.getColumnModel().getColumn(0).setMinWidth(40);
         table.getColumnModel().getColumn(1).setMinWidth(100);
         table.getColumnModel().getColumn(2).setMinWidth(120);
-        table.getColumnModel().getColumn(2).setMinWidth(120);
         table.getColumnModel().getColumn(3).setMinWidth(120);
-        table.getColumnModel().getColumn(3).setMinWidth(140);
+        table.getColumnModel().getColumn(4).setMinWidth(120);
+        table.getColumnModel().getColumn(5).setMinWidth(140);
         table.setFont(new Font("Arial", Font.PLAIN, 14));
         table.setRowHeight(25);
         table.validate();

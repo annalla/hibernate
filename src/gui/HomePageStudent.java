@@ -57,7 +57,6 @@ import java.util.List;
  */
 
 /**
- *
  * @author Xuyen
  */
 public class HomePageStudent extends javax.swing.JFrame {
@@ -67,6 +66,7 @@ public class HomePageStudent extends javax.swing.JFrame {
      */
     public static String nameLogin = "";
     public static String thongBaoMatKhau = "";
+
     public HomePageStudent() {
         initComponents();
         setUser();
@@ -80,12 +80,14 @@ public class HomePageStudent extends javax.swing.JFrame {
         controller.setEvent(listDanhMuc);
 
     }
+
     private void setUser() {
-        StudentEntity st=StudentDAO.getStudentbyUsername(Login.nameLogin);
+        StudentEntity st = StudentDAO.getStudentbyUsername(Login.nameLogin);
         nameLogin = Login.nameLogin;
         jLbAccount.setText(st.getFullname());
     }
-    private StudentEntity getUser(){
+
+    private StudentEntity getUser() {
         return StudentDAO.getStudentbyUsername(Login.nameLogin);
     }
 
@@ -303,7 +305,7 @@ public class HomePageStudent extends javax.swing.JFrame {
     private void btnLogoutActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
         dispose();
-        Login login =new Login();
+        Login login = new Login();
         login.setVisible(true);
     }
 

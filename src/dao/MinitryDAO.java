@@ -26,6 +26,7 @@ public class MinitryDAO {
         }
         return ds;
     }
+
     public static MinitryEntity getMinitrybyUsername(String username) {
         MinitryEntity st = null;
         Session session = HibernateUtil.getSessionFactory()
@@ -33,8 +34,8 @@ public class MinitryDAO {
         try {
             String hql = "select m from MinitryEntity m where m.username =:username";
             Query query = session.createQuery(hql);
-            query.setString("username",username);
-            st=(MinitryEntity) query.uniqueResult();
+            query.setString("username", username);
+            st = (MinitryEntity) query.uniqueResult();
         } catch (HibernateException ex) {
 //Log the exception
             System.err.println(ex);
@@ -43,12 +44,13 @@ public class MinitryDAO {
         }
         return st;
     }
+
     public static MinitryEntity getInforMinitry(int minitryId) {
         MinitryEntity sv = null;
         Session session = HibernateUtil.getSessionFactory().openSession();
         try {
             //int minitry=Integer.parseInt(minitryId);
-            sv = (MinitryEntity) session.get(MinitryEntity.class,minitryId);
+            sv = (MinitryEntity) session.get(MinitryEntity.class, minitryId);
         } catch (HibernateException ex) {
 //Log the exception
             System.err.println(ex);
@@ -57,6 +59,7 @@ public class MinitryDAO {
         }
         return sv;
     }
+
     public static boolean addMinitry(MinitryEntity sv) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         if (MinitryDAO.getMinitrybyUsername(sv.getUsername()) != null) {
@@ -77,6 +80,7 @@ public class MinitryDAO {
         }
         return true;
     }
+
     public static boolean updateMinitry(MinitryEntity sv) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         if (MinitryDAO.getInforMinitry(sv.getMinitryId()) == null) {
@@ -97,6 +101,7 @@ public class MinitryDAO {
         }
         return true;
     }
+
     public static boolean deleteMinitry(MinitryEntity sv) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         if (MinitryDAO.getInforMinitry(sv.getMinitryId()) == null) {

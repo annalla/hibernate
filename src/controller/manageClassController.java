@@ -1,12 +1,8 @@
 package controller;
 
-import com.toedter.calendar.JDateChooser;
-import dao.MinitryDAO;
-import dao.StudentDAO;
+import dao.ClassDAO;
 import dao.SubjectDAO;
-import pojo.MinitryEntity;
-import pojo.RegistrationEntity;
-import pojo.StudentEntity;
+import pojo.ClazzEntity;
 import pojo.SubjectEntity;
 
 import javax.swing.*;
@@ -17,44 +13,41 @@ import javax.swing.table.TableRowSorter;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.sql.Date;
 import java.util.ArrayList;
 
-public class ManagementSubjectController {
+public class manageClassController {
     private JPanel jPnView;
     private JTextField jtfSearchh;
     private JButton btnDelete;
-    private JButton btnUpdate;
-    private JTextField jTFSujectId;
-    private JTextField jTFSuject;
-    private JTextField jTFcredit;
+    private JTextField jTFclassName;
+    private JTextField jTFTotal;
+    private JTextField jTFboy;
     private JLabel id;
 
     private ClassTableModel classTableModel = null;
     private TableRowSorter<TableModel> rowSorter = null;
 
-    private final String[] COLUMNSSuject = {"STT", "Mã môn học", "Tên Môn học", "Số tín chỉ"};
+    private final String[] COLUMNS = {"STT", "Tên lớp học", "Sĩ số", "Tổng số nam", "Tổng số nữ"};
 
     //    private TableRowSorter<TableModel> rowSorter = null;
-    public ManagementSubjectController(JPanel jPnView, JTextField jtfSearchh) {
+    public manageClassController(JPanel jPnView, JTextField jtfSearchh) {
         this.jPnView = jPnView;
         this.jtfSearchh = jtfSearchh;
         this.classTableModel = new ClassTableModel();
     }
 
-    public void setField(JButton btndelete, JButton btnupdate, JTextField Subid, JTextField subject, JTextField credit, JLabel id) {
+    public void setField(JButton btndelete, JTextField className, JTextField total, JTextField boys, JLabel id) {
         this.btnDelete = btndelete;
-        this.btnUpdate = btnupdate;
-        this.jTFSujectId = Subid;
-        this.jTFSuject = subject;
-        this.jTFcredit = credit;
+        this.jTFclassName = className;
+        this.jTFTotal = total;
+        jTFboy = boys;
         this.id = id;
     }
 
-    public void setDataToTableSubject() {
-        ArrayList<SubjectEntity> list = (ArrayList<SubjectEntity>) SubjectDAO.getSubjectList();
+    public void setDataToTableClass() {
+        ArrayList<ClazzEntity> list = (ArrayList<ClazzEntity>) ClassDAO.getClassList();
 
-        DefaultTableModel model = ClassTableModel.setTableSubject(list, COLUMNSSuject);
+        DefaultTableModel model = ClassTableModel.setTableClass(list, COLUMNS);
         JTable table = new JTable(model);
 
         rowSorter = new TableRowSorter<>(table.getModel());
@@ -93,13 +86,12 @@ public class ManagementSubjectController {
                     DefaultTableModel model = (DefaultTableModel) table.getModel();
                     int selectedRowIndex = table.getSelectedRow();
                     selectedRowIndex = table.convertRowIndexToModel(selectedRowIndex);
-                    String idSubject = model.getValueAt(selectedRowIndex, 1).toString();
-                    jTFSujectId.setText(idSubject);
-                    jTFSuject.setText(model.getValueAt(selectedRowIndex, 2).toString());
-                    jTFcredit.setText(model.getValueAt(selectedRowIndex, 3).toString());
-                    btnUpdate.setEnabled(true);
+                    String classname = model.getValueAt(selectedRowIndex, 1).toString();
+                    jTFclassName.setText(classname);
+                    jTFTotal.setText(model.getValueAt(selectedRowIndex, 2).toString());
+                    jTFboy.setText(model.getValueAt(selectedRowIndex, 3).toString());
                     btnDelete.setEnabled(true);
-                    id.setText(String.valueOf(SubjectDAO.getSujectbyID(idSubject).getSubId()));
+                    id.setText(String.valueOf(ClassDAO.getClassbyClassname(classname).getClassId()));
 
                 }
             }
@@ -111,9 +103,10 @@ public class ManagementSubjectController {
         table.getTableHeader().setFont(new Font("Arial", Font.BOLD, 14));
         table.getTableHeader().setPreferredSize(new Dimension(40, 25));
         table.getColumnModel().getColumn(0).setMinWidth(40);
-        table.getColumnModel().getColumn(1).setMinWidth(150);
-        table.getColumnModel().getColumn(2).setMinWidth(300);
-        table.getColumnModel().getColumn(3).setMinWidth(110);
+        table.getColumnModel().getColumn(1).setMinWidth(120);
+        table.getColumnModel().getColumn(2).setMinWidth(120);
+        table.getColumnModel().getColumn(3).setMinWidth(120);
+        table.getColumnModel().getColumn(4).setMinWidth(120);
         table.setFont(new Font("Arial", Font.PLAIN, 14));
         table.setRowHeight(25);
         table.validate();
@@ -121,7 +114,7 @@ public class ManagementSubjectController {
 
         JScrollPane scroll = new JScrollPane();
         scroll.getViewport().add(table);
-        scroll.setPreferredSize(new Dimension(600, 400));
+        scroll.setPreferredSize(new Dimension(520, 400));
         jPnView.removeAll();
         //jPnView.setLayout(new CardLayout());
         jPnView.setLayout(new BorderLayout());
@@ -129,5 +122,4 @@ public class ManagementSubjectController {
         jPnView.validate();
         jPnView.repaint();
     }
-
 }

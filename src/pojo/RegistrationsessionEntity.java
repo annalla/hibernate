@@ -7,7 +7,15 @@ public class RegistrationsessionEntity {
     private int registId;
     private Timestamp startdate;
     private Timestamp enddate;
+    private SemesterEntity semester;
 
+    public SemesterEntity getSemester() {
+        return semester;
+    }
+
+    public void setSemester(SemesterEntity semester) {
+        this.semester = semester;
+    }
 
     public int getRegistId() {
         return registId;

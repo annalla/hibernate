@@ -162,7 +162,7 @@ public class ManagementStudentListController {
         table.getColumnModel().getColumn(6).setMinWidth(30);
         table.getColumnModel().getColumn(7).setMinWidth(80);
         table.getColumnModel().getColumn(8).setMinWidth(80);
-        table.getColumnModel().getColumn(9).setMinWidth(170);
+        table.getColumnModel().getColumn(9).setMinWidth(165);
         table.setFont(new Font("Arial", Font.PLAIN, 14));
         table.setRowHeight(25);
         table.validate();

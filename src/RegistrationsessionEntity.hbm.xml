@@ -7,6 +7,7 @@
     <class name="pojo.RegistrationsessionEntity" table="registrationsession" schema="public" catalog="dkhp">
         <id name="registId">
             <column name="regist_id" sql-type="integer"/>
+            <generator class="increment"></generator>
         </id>
         <property name="startdate">
             <column name="startdate" sql-type="timestamp"/>
@@ -14,5 +15,9 @@
         <property name="enddate">
             <column name="enddate" sql-type="timestamp"/>
         </property>
+        <many-to-one class="pojo.SemesterEntity" name="semester"
+                     fetch="select" lazy="false">
+            <column length="45" name="semester_id" not-null="true"/>
+        </many-to-one>
     </class>
 </hibernate-mapping>

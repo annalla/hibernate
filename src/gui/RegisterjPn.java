@@ -6,7 +6,6 @@
 package gui;
 
 /**
- *
  * @author Xuyen
  */
 public class RegisterjPn extends javax.swing.JPanel {

@@ -264,7 +264,7 @@ public class AccountStudentjPn extends javax.swing.JPanel {
         });
 
         jCBgender.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jCBgender.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Nữ", "Nam" }));
+        jCBgender.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"Nữ", "Nam"}));
         jCBgender.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 jGenderKeyReleased(evt);
@@ -393,7 +393,6 @@ public class AccountStudentjPn extends javax.swing.JPanel {
     }// </editor-fold>
 
 
-
     private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
         setBtnUpdate();
@@ -464,23 +463,24 @@ public class AccountStudentjPn extends javax.swing.JPanel {
             updatePassword();
         }
     }
-    private  void updateInformation(){
-        if(updateInfor()){
+
+    private void updateInformation() {
+        if (updateInfor()) {
             JOptionPane.showMessageDialog(null, "Cập nhật thông tn thành công");
             setInforStudent();
-        }
-        else{
+        } else {
             JOptionPane.showMessageDialog(null, "Cập nhật thất bại!");
         }
     }
-    private boolean updateInfor(){
-        StudentEntity newU=st;
-        String name=jTFName.getText();
-        java.util.Date date= jDCBirthday.getDate();
-        Date date1=new Date(date.getYear(),date.getMonth(),date.getDate());
-        int gender=jCBgender.getSelectedIndex();
-        String address=jTAAddress.getText();
-        if(name.length()==0||address.length()==0){
+
+    private boolean updateInfor() {
+        StudentEntity newU = st;
+        String name = jTFName.getText();
+        java.util.Date date = jDCBirthday.getDate();
+        Date date1 = new Date(date.getYear(), date.getMonth(), date.getDate());
+        int gender = jCBgender.getSelectedIndex();
+        String address = jTAAddress.getText();
+        if (name.length() == 0 || address.length() == 0) {
             JOptionPane.showMessageDialog(null, "Tên và Địa chỉ không để trống!");
             return false;
         }
@@ -491,43 +491,44 @@ public class AccountStudentjPn extends javax.swing.JPanel {
 
         return StudentDAO.updateStudent(newU);
     }
-    private void updatePassword(){
-        if(updatePass()==true){
+
+    private void updatePassword() {
+        if (updatePass() == true) {
             JOptionPane.showMessageDialog(null, "Cập nhật password thành công!");
             jPFnewpass.setText("");
             jPFoldpass.setText("");
             jTFrepass.setText("");
-        }
-        else{
+        } else {
             jPFnewpass.setText("");
             jPFoldpass.setText("");
             jTFrepass.setText("");
         }
     }
-    private boolean updatePass(){
-        StudentEntity newPass=st;
-        String oldpass=jPFoldpass.getText();
-        String newpass=jPFnewpass.getText();
-        String repass=jTFrepass.getText();
+
+    private boolean updatePass() {
+        StudentEntity newPass = st;
+        String oldpass = jPFoldpass.getText();
+        String newpass = jPFnewpass.getText();
+        String repass = jTFrepass.getText();
         System.out.println(oldpass);
         System.out.println(st.getPassword());
-        if(oldpass.length()==0||newpass.length()==0||repass.length()==0){
+        if (oldpass.length() == 0 || newpass.length() == 0 || repass.length() == 0) {
             JOptionPane.showMessageDialog(null, "Mật khẩu mới, Mật khẩu cũ và Nhập lại mật khẩu không được trống !");
             return false;
         }
-        if(newPass.getPassword().equals(oldpass)==false){
+        if (newPass.getPassword().equals(oldpass) == false) {
             JOptionPane.showMessageDialog(null, "Mật khẩu cũ không trùng khớp !");
             return false;
         }
-        if(newpass.equals(repass)==false){
+        if (newpass.equals(repass) == false) {
             JOptionPane.showMessageDialog(null, "Nhập lại mật khẩu không trùng khớp mật khẩu mới !");
             return false;
         }
-        if(newpass.equals(oldpass)){
+        if (newpass.equals(oldpass)) {
             JOptionPane.showMessageDialog(null, "Mật khẩu mới và cũ trùng nhau!");
             return false;
         }
-        if(newpass.length()<4){
+        if (newpass.length() < 4) {
             JOptionPane.showMessageDialog(null, "Mật khẩu nên lớn hơn 3 ký tự !");
             return false;
         }
@@ -535,6 +536,7 @@ public class AccountStudentjPn extends javax.swing.JPanel {
         System.out.println(newPass.getPassword());
         return StudentDAO.updateStudent(newPass);
     }
+
     // Variables declaration - do not modify
     private javax.swing.JButton btnChangPass;
     private javax.swing.JButton btnSave;

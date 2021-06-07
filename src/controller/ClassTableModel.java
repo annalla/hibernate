@@ -1,6 +1,7 @@
 package controller;
 
 
+import gui.jPnQLSemester;
 import pojo.*;
 
 import java.util.ArrayList;
@@ -8,8 +9,38 @@ import java.util.List;
 import java.util.Set;
 import javax.swing.table.DefaultTableModel;
 
-
+/*Tham khảo tạo bảng*/
 public class ClassTableModel {
+    public static DefaultTableModel setTableRegistraionSession(ArrayList<RegistrationsessionEntity> listItem, String[] listColumn) {
+        int columns = listColumn.length;
+        DefaultTableModel dtm = new DefaultTableModel() {
+            @Override
+            public boolean isCellEditable(int rowIndex, int colIndex) {
+                return false;
+            }
+
+            @Override
+            public Class<?> getColumnClass(int columnIndex) {
+                return String.class;
+            }
+        };
+        dtm.setColumnIdentifiers(listColumn);
+        Object[] obj;
+        int i = 1;
+        for (RegistrationsessionEntity s : listItem) {
+            obj = new Object[columns];
+            obj[0] = i;
+            obj[1] = s.getSemester().getTerm();
+            obj[2] = s.getSemester().getYear();
+            obj[3] = s.getStartdate();
+            obj[4] = s.getEnddate();
+            i++;
+            dtm.addRow(obj);
+
+        }
+        return dtm;
+    }
+
     public static DefaultTableModel setTableClass(ArrayList<ClazzEntity> listItem, String[] listColumn) {
         int columns = listColumn.length;
         DefaultTableModel dtm = new DefaultTableModel() {
@@ -32,7 +63,7 @@ public class ClassTableModel {
             obj[1] = s.getClassname();
             obj[2] = s.getTotal();
             obj[3] = s.getBoy();
-            obj[3] = s.getGirl();
+            obj[4] = s.getGirl();
             i++;
             dtm.addRow(obj);
 
@@ -63,7 +94,12 @@ public class ClassTableModel {
             obj[2] = s.getYear();
             obj[3] = s.getStartsemester();
             obj[4] = s.getEndsemester();
-            obj[5] = s.getIspresent();
+            if(s.getSemesterId()== jPnQLSemester.currentSemester){
+                obj[5] = true;
+            }
+            else{
+                obj[5] = false;
+            }
             i++;
             dtm.addRow(obj);
 

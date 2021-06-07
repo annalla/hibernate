@@ -366,7 +366,6 @@ public class jPnQLSubject extends javax.swing.JPanel {
         s.setSubjectname(subject);
         s.setCredit(Integer.parseInt(credit));
 
-        //minitry.setMinitryId(8);
         if (SubjectDAO.addSubject(s)) {
             JOptionPane.showMessageDialog(null, "Thêm môn học thành công!");
             setData();

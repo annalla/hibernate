@@ -5,47 +5,91 @@
  */
 package gui;
 
-import controller.ManagementSemesterController;
-import dao.SemesterDAO;
+import controller.manageClassController;
+import dao.ClassDAO;
 import dao.SubjectDAO;
-import pojo.SemesterEntity;
+import pojo.ClazzEntity;
 import pojo.SubjectEntity;
 
 import javax.swing.*;
-import java.sql.Date;
+import java.awt.event.KeyEvent;
 import java.util.Locale;
 
 /**
  * @author Xuyen
  */
-public class jPnQLSemester extends javax.swing.JPanel {
-    public static int currentSemester = 0;
+public class jPnClass extends javax.swing.JPanel {
 
     /**
      * Creates new form jPnQLGV
      */
-    public jPnQLSemester() {
+    public jPnClass() {
         initComponents();
         labelId.setVisible(false);
         setData();
     }
 
     void setData() {
-
         btnDelete.setEnabled(false);
-        btnCurrentPeriod.setEnabled(false);
-        ManagementSemesterController controller = new ManagementSemesterController(jPnTable, jTFSearch);
-        controller.setField(btnDelete, btnCurrentPeriod, jTFName, jTFYear, jDCStart, jDCend, labelId);
-        controller.setDataToTableSemester();
-        jTFName.requestFocus();
+        manageClassController controller = new manageClassController(jPnTable, jTFSearch);
+        controller.setField(btnDelete, jTFclassName, jTFtotal, jTFboy, labelId);
+        controller.setDataToTableClass();
     }
 
     void setClear() {
-        jTFYear.setText("");
-        jTFName.setText("");
-        jDCStart.setCalendar(null);
-        jDCend.setCalendar(null);
-        setData();
+        jTFtotal.setText("");
+        jTFclassName.setText("");
+        jTFboy.setText("");
+    }
+    public void deleteClass(){
+        int id=Integer.parseInt(labelId.getText());
+        if(ClassDAO.deleteClass(ClassDAO.getClassbyId(id))){
+            JOptionPane.showMessageDialog(null, "Xóa thành công!");
+            setData();
+            setClear();
+            return;
+        }
+        JOptionPane.showMessageDialog(null, "Xóa không thành công!");
+        setClear();
+
+    }
+
+
+
+    public void addClass() {
+        String classname=jTFclassName.getText().toUpperCase();
+        String total=jTFtotal.getText();
+        String boy=jTFboy.getText();
+        boolean isNumeric = (total != null && total.matches("[0-9]+"));
+        boolean isNumeric2 = (boy != null && boy.matches("[0-9]+"));
+        if (classname.length() == 0 || total.length() == 0 || boy.length() == 0) {
+            JOptionPane.showMessageDialog(null, "Không để trống!");
+            return;
+        }
+        if(!isNumeric||!isNumeric2){
+            JOptionPane.showMessageDialog(null, "Sĩ số và Số nam là số!");
+            return;
+        }
+        int t=Integer.parseInt(total);
+        int b=Integer.parseInt(boy);
+        if(b>t){
+            JOptionPane.showMessageDialog(null, "Sĩ số phải lớn hơn hoặc bằng  Số nam!");
+            return;
+        }
+        ClazzEntity cl=new ClazzEntity();
+        cl.setClassname(classname);
+        cl.setTotal(t);
+        cl.setBoy(b);
+        cl.setGirl(t-b);
+        if (ClassDAO.addClass(cl)) {
+            JOptionPane.showMessageDialog(null, "Thêm lớp học thành công!");
+            setData();
+            setClear();
+            return;
+        }
+        JOptionPane.showMessageDialog(null, "Trùng lớp học. Vui lòng kiểm tra lại!");
+        return;
+
     }
 
     /**
@@ -61,18 +105,15 @@ public class jPnQLSemester extends javax.swing.JPanel {
         jPanel1 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jTFName = new javax.swing.JTextField();
-        jTFYear = new javax.swing.JTextField();
+        jTFclassName = new javax.swing.JTextField();
+        jTFtotal = new javax.swing.JTextField();
         btnAdd = new javax.swing.JButton();
-        btnCurrentPeriod = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jTFSearch = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         btnDelete = new javax.swing.JButton();
         labelId = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jDCStart = new com.toedter.calendar.JDateChooser();
-        jDCend = new com.toedter.calendar.JDateChooser();
+        jTFboy = new javax.swing.JTextField();
         jPnTable = new javax.swing.JPanel();
 
         javax.swing.GroupLayout jDialog1Layout = new javax.swing.GroupLayout(jDialog1.getContentPane());
@@ -87,27 +128,23 @@ public class jPnQLSemester extends javax.swing.JPanel {
         );
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel2.setText("Tên học kì:");
+        jLabel2.setText("Tên lớp:");
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel3.setText("Năm học:");
+        jLabel3.setText("Sĩ số:");
 
-        jTFName.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jTFName.setToolTipText("");
-        jTFName.addKeyListener(new java.awt.event.KeyAdapter() {
+        jTFclassName.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jTFclassName.setToolTipText("");
+        jTFclassName.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
-                jTFNameKeyReleased(evt);
+                jTFclassNameKeyReleased(evt);
             }
         });
-        jDCStart.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
-        jDCend.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-
-
-        jTFYear.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jTFYear.addKeyListener(new java.awt.event.KeyAdapter() {
+        jTFtotal.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jTFtotal.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
-                jTFYearKeyReleased(evt);
+                jTFtotalKeyReleased(evt);
             }
         });
 
@@ -117,15 +154,6 @@ public class jPnQLSemester extends javax.swing.JPanel {
         btnAdd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAddActionPerformed(evt);
-            }
-        });
-
-        btnCurrentPeriod.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        btnCurrentPeriod.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/edit.png"))); // NOI18N
-        btnCurrentPeriod.setText("Set học kì hiện tại");
-        btnCurrentPeriod.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCurrentPeriodActionPerformed(evt);
             }
         });
 
@@ -140,7 +168,7 @@ public class jPnQLSemester extends javax.swing.JPanel {
         });
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel7.setText("Bắt đầu:");
+        jLabel7.setText("Số nam:");
 
         btnDelete.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         btnDelete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/delete.png"))); // NOI18N
@@ -151,8 +179,13 @@ public class jPnQLSemester extends javax.swing.JPanel {
             }
         });
 
-        jLabel4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel4.setText("Kết thúc:");
+        jTFboy.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jTFboy.setToolTipText("");
+        jTFboy.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTFboyKeyReleased(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -172,22 +205,18 @@ public class jPnQLSemester extends javax.swing.JPanel {
                                                                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                                                                 .addComponent(jLabel2)
                                                                                 .addComponent(jLabel1))
-                                                                        .addComponent(jLabel7)
-                                                                        .addComponent(jLabel4))
-                                                                .addGap(18, 18, 18)
+                                                                        .addComponent(jLabel7))
+                                                                .addGap(23, 23, 23)
                                                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                                                        .addComponent(jTFYear, javax.swing.GroupLayout.Alignment.TRAILING)
+                                                                        .addGroup(jPanel1Layout.createSequentialGroup()
+                                                                                .addComponent(btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                                                .addComponent(btnDelete)
+                                                                                .addGap(14, 14, 14))
+                                                                        .addComponent(jTFtotal, javax.swing.GroupLayout.Alignment.TRAILING)
                                                                         .addComponent(jTFSearch)
-                                                                        .addComponent(jTFName, javax.swing.GroupLayout.DEFAULT_SIZE, 222, Short.MAX_VALUE)
-                                                                        .addComponent(jDCStart, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                                        .addComponent(jDCend, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
-                                        .addGroup(jPanel1Layout.createSequentialGroup()
-                                                .addContainerGap()
-                                                .addComponent(btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(btnDelete)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                .addComponent(btnCurrentPeriod)))
+                                                                        .addComponent(jTFclassName, javax.swing.GroupLayout.DEFAULT_SIZE, 222, Short.MAX_VALUE)
+                                                                        .addComponent(jTFboy))))))
                                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -199,30 +228,23 @@ public class jPnQLSemester extends javax.swing.JPanel {
                                         .addComponent(jTFSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(jTFName, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jTFclassName, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addComponent(jLabel2))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(jTFYear, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jTFtotal, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addComponent(jLabel3))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addGroup(jPanel1Layout.createSequentialGroup()
-                                                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                        .addGroup(jPanel1Layout.createSequentialGroup()
-                                                .addComponent(jDCStart, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(jDCend, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGap(71, 71, 71)
+                                        .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(jTFboy, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE))
+                                .addGap(108, 108, 108)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(btnCurrentPeriod))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
                                 .addComponent(labelId)
-                                .addContainerGap(296, Short.MAX_VALUE))
+                                .addContainerGap(292, Short.MAX_VALUE))
         );
 
         jPnTable.setFocusTraversalPolicyProvider(true);
@@ -260,120 +282,52 @@ public class jPnQLSemester extends javax.swing.JPanel {
         // TODO add your handling code here:
     }
 
-    private void btnCurrentPeriodActionPerformed(java.awt.event.ActionEvent evt) {
-        setCurentPeriod();
-        // TODO add your handling code here:
-    }
-
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {
-        deleteSemester();
         // TODO add your handling code here:
+        deleteClass();
     }
 
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {
-        addSesmester();
         // TODO add your handling code here:
+        addClass();
     }
 
-    public void addSesmester() {
-        String NameSemester = jTFName.getText().toUpperCase();
-        String year = jTFYear.getText();
-        java.util.Date dateS = jDCStart.getDate();
-        java.util.Date dateE = jDCend.getDate();
-        if (dateS == null || dateE == null) {
-            JOptionPane.showMessageDialog(null, "Vui lòng chọn ngày!");
-            return;
-        }
-        Date dateStart = new Date(dateS.getYear(), dateS.getMonth(), dateS.getDate());
-        Date dateEnd = new Date(dateE.getYear(), dateE.getMonth(), dateE.getDate());
-        if (NameSemester.length() == 0 || year.length() == 0) {
-            JOptionPane.showMessageDialog(null, "Không để trống!");
-            return;
-        }
-        SemesterEntity s = new SemesterEntity();
-        s.setYear(year);
-        s.setTerm(NameSemester);
-        s.setStartsemester(dateStart);
-        s.setEndsemester(dateEnd);
-        s.setIspresent(false);
-        //minitry.setMinitryId(8);
-        if (SemesterDAO.addSesmester(s)) {
-            JOptionPane.showMessageDialog(null, "Thêm học kỳ thành công!");
-            setData();
-            setClear();
-            return;
-        }
-        JOptionPane.showMessageDialog(null, "Trùng học kỳ. Vui lòng kiểm tra lại!");
-        return;
-
-    }
-
-    public void deleteSemester() {
-        int id = Integer.parseInt(labelId.getText());
-        if (SemesterDAO.deleteSemester(SemesterDAO.getSemester(id))) {
-            JOptionPane.showMessageDialog(null, "Xóa thành công!");
-            setData();
-            setClear();
-            return;
-        }
-        JOptionPane.showMessageDialog(null, "Không tồn tại HK!");
-        setClear();
-
-    }
-
-
-    public void setCurentPeriod() {
-        int id = Integer.parseInt(labelId.getText());
-        SemesterEntity s = SemesterDAO.getSemester(id);
-        currentSemester = id;
-        if (s.getIspresent() == true) {
-            s.setIspresent(false);
-        } else {
-            s.setIspresent(true);
-
-        }
-        if (SemesterDAO.updateSemester(s)) {
-            JOptionPane.showMessageDialog(null, "Set thành công!");
-            setData();
-            setClear();
-            return;
-        }
-        JOptionPane.showMessageDialog(null, "Thất bại!");
-        return;
-
-    }
-
-    private void jTFNameKeyReleased(java.awt.event.KeyEvent evt) {
+    private void jTFclassNameKeyReleased(java.awt.event.KeyEvent evt) {
         // TODO add your handling code here:
-        if (evt.getKeyCode() == evt.VK_ENTER) {
-            jTFYear.requestFocus();
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            jTFtotal.requestFocus();
         }
     }
 
-    private void jTFYearKeyReleased(java.awt.event.KeyEvent evt) {
+    private void jTFtotalKeyReleased(java.awt.event.KeyEvent evt) {
         // TODO add your handling code here:
-        if (evt.getKeyCode() == evt.VK_ENTER) {
-            jDCStart.requestFocus();
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            jTFboy.requestFocus();
         }
     }
+
+    private void jTFboyKeyReleased(java.awt.event.KeyEvent evt) {
+        // TODO add your handling code here:
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            addClass();;
+        }
+    }
+
 
     // Variables declaration - do not modify
     private javax.swing.JButton btnAdd;
-    private javax.swing.JButton btnCurrentPeriod;
     private javax.swing.JButton btnDelete;
-    private com.toedter.calendar.JDateChooser jDCStart;
-    private com.toedter.calendar.JDateChooser jDCend;
     private javax.swing.JDialog jDialog1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPnTable;
-    private javax.swing.JTextField jTFName;
     private javax.swing.JTextField jTFSearch;
-    private javax.swing.JTextField jTFYear;
+    private javax.swing.JTextField jTFboy;
+    private javax.swing.JTextField jTFclassName;
+    private javax.swing.JTextField jTFtotal;
     private javax.swing.JLabel labelId;
     // End of variables declaration
 }

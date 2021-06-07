@@ -36,7 +36,7 @@ public class StudentController {
     private JComboBox jCBgender;
     private JTextArea jaddress;
     private JDateChooser jBirth;
-    private  JLabel id;
+    private JLabel id;
 
     private ClassTableModel classTableModel = null;
     private TableRowSorter<TableModel> rowSorter = null;
@@ -52,7 +52,7 @@ public class StudentController {
         this.classTableModel = new ClassTableModel();
     }
 
-    public void setButton(JButton btndelete, JButton btnreset, JButton btnupdate, JTextField username, JTextField name, JComboBox gender, JTextArea address, JDateChooser birth,JLabel id) {
+    public void setButton(JButton btndelete, JButton btnreset, JButton btnupdate, JTextField username, JTextField name, JComboBox gender, JTextArea address, JDateChooser birth, JLabel id) {
         this.btnDelete = btndelete;
         this.btnReset = btnreset;
         this.btnUpdate = btnupdate;
@@ -61,7 +61,7 @@ public class StudentController {
         this.jCBgender = gender;
         this.jTFName = name;
         this.jBirth = birth;
-        this.id=id;
+        this.id = id;
     }
 
     public void setDataToTableCourse(String username) {
@@ -172,20 +172,19 @@ public class StudentController {
                     DefaultTableModel model = (DefaultTableModel) table.getModel();
                     int selectedRowIndex = table.getSelectedRow();
                     selectedRowIndex = table.convertRowIndexToModel(selectedRowIndex);
-                    String username=model.getValueAt(selectedRowIndex,1).toString();
+                    String username = model.getValueAt(selectedRowIndex, 1).toString();
                     jTFUsername.setText(username);
-                    jTFName.setText(model.getValueAt(selectedRowIndex,3).toString());
-                    int gender=0;
-                    if(model.getValueAt(selectedRowIndex,4).toString().equals("Nam")){
-                        gender=1;
-                    }
-                    else{
-                        gender=0;
+                    jTFName.setText(model.getValueAt(selectedRowIndex, 3).toString());
+                    int gender = 0;
+                    if (model.getValueAt(selectedRowIndex, 4).toString().equals("Nam")) {
+                        gender = 1;
+                    } else {
+                        gender = 0;
                     }
                     id.setText(String.valueOf(MinitryDAO.getMinitrybyUsername(username).getMinitryId()));
                     jCBgender.setSelectedIndex(gender);
-                    jBirth.setDate((Date)model.getValueAt(selectedRowIndex,5));
-                    jaddress.setText(model.getValueAt(selectedRowIndex,6).toString());
+                    jBirth.setDate((Date) model.getValueAt(selectedRowIndex, 5));
+                    jaddress.setText(model.getValueAt(selectedRowIndex, 6).toString());
                     btnDelete.setEnabled(true);
                     btnReset.setEnabled(true);
                     btnUpdate.setEnabled(true);

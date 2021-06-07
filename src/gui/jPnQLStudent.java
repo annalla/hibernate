@@ -41,15 +41,15 @@ public class jPnQLStudent extends javax.swing.JPanel {
             CBclass[i] = classs.getClassname();
             i++;
         }
+        jCBclass.setModel(new javax.swing.DefaultComboBoxModel<>(CBclass));
     }
     public void setData() {
         jTFUserame.setEnabled(false);
-        jCBclass.setModel(new javax.swing.DefaultComboBoxModel<>(CBclass));
         btnReset.setEnabled(false);
         btnEdit.setEnabled(false);
         ManagementStudentListController controller = new ManagementStudentListController(jPnTable, jTFSearch);
-        controller.setDataToTableStudent(CBclass);
         controller.setField(btnFind, btnReset, btnEdit, jTFUserame, jTFName, jBCgender, jTAadd, jDCbirth, labelId, jTFmssv, jCBclass, jTASubject);
+        controller.setDataToTableStudent(CBclass);
         jTFName.requestFocus();
         labelId.setText("");
         jTASubject.setEnabled(false);
@@ -233,7 +233,8 @@ public class jPnQLStudent extends javax.swing.JPanel {
         jLabel9.setText("Môn học:");
 
         jTASubject.setColumns(20);
-        jTASubject.setRows(5);
+        jTASubject.setRows(10);
+        jTASubject.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jTASubject.setPreferredSize(new java.awt.Dimension(164, 64));
         jScrollPane2.setViewportView(jTASubject);
 

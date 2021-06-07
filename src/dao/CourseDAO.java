@@ -12,7 +12,7 @@ public class CourseDAO {
         Session session = HibernateUtil.getSessionFactory()
                 .openSession();
         try {
-            int studentId=Integer.parseInt(student);
+            int studentId = Integer.parseInt(student);
             sach = (CourseEntity) session.get(CourseEntity.class, studentId);
         } catch (HibernateException ex) {
 //Log the exception

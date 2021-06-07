@@ -7,7 +7,7 @@ import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.List;
-
+/*Tham khảo cách chuyển màn hình*/
 public class ScreenController {
     private JPanel jpbView;
     private String kindSelected = "";
@@ -79,6 +79,12 @@ public class ScreenController {
                     break;
                 case "QLLH":
                     node =new jPnClass();
+                    break;
+                case "QLDKHP":
+                    node =new jPNQLRegistrationSession();
+                    break;
+                case "QLHP":
+                    node =new jPnQLCourse();
                     break;
                 default:
                     break;

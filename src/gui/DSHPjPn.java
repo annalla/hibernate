@@ -8,7 +8,6 @@ package gui;
 import controller.StudentController;
 
 /**
- *
  * @author Xuyen
  */
 public class DSHPjPn extends javax.swing.JPanel {
@@ -18,7 +17,7 @@ public class DSHPjPn extends javax.swing.JPanel {
      */
     public DSHPjPn() {
         initComponents();
-        StudentController controller=new StudentController(jPnDS,jTFSearch);
+        StudentController controller = new StudentController(jPnDS, jTFSearch);
         controller.setDataToTableCourse(HomePageStudent.nameLogin);
     }
 

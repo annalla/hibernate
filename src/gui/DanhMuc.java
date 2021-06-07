@@ -2,7 +2,7 @@ package gui;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-
+/*Tham khảo cách chuyển màn hình*/
 public class DanhMuc {
 
     private String kind;
@@ -17,7 +17,6 @@ public class DanhMuc {
         this.jpn = jpn;
         this.jlb = jlb;
     }
-
     public String getKind() {
         return kind;
     }
