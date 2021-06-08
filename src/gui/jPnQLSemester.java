@@ -6,6 +6,7 @@
 package gui;
 
 import controller.ManagementSemesterController;
+import dao.CourseDAO;
 import dao.SemesterDAO;
 import dao.SubjectDAO;
 import pojo.SemesterEntity;
@@ -13,13 +14,15 @@ import pojo.SubjectEntity;
 
 import javax.swing.*;
 import java.sql.Date;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 
 /**
  * @author Xuyen
  */
 public class jPnQLSemester extends javax.swing.JPanel {
-    public static int currentSemester = 0;
+    //public static int currentSemester = 0;
 
     /**
      * Creates new form jPnQLGV
@@ -310,7 +313,7 @@ public class jPnQLSemester extends javax.swing.JPanel {
 
     public void deleteSemester() {
         int id = Integer.parseInt(labelId.getText());
-        if (SemesterDAO.deleteSemester(SemesterDAO.getSemester(id))) {
+        if (CourseDAO.deleteCourse(CourseDAO.getCoursebyId(id))) {
             JOptionPane.showMessageDialog(null, "Xóa thành công!");
             setData();
             setClear();
@@ -325,13 +328,13 @@ public class jPnQLSemester extends javax.swing.JPanel {
     public void setCurentPeriod() {
         int id = Integer.parseInt(labelId.getText());
         SemesterEntity s = SemesterDAO.getSemester(id);
-        currentSemester = id;
-        if (s.getIspresent() == true) {
-            s.setIspresent(false);
-        } else {
-            s.setIspresent(true);
-
+        List<SemesterEntity> list=SemesterDAO.getSemesterList();
+        for(SemesterEntity semester:list){
+            semester.setIspresent(false);
+            SemesterDAO.updateSemester(semester);
         }
+        //currentSemester = id;
+        s.setIspresent(true);
         if (SemesterDAO.updateSemester(s)) {
             JOptionPane.showMessageDialog(null, "Set thành công!");
             setData();

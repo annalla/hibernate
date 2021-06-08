@@ -56,6 +56,23 @@ public class SubjectDAO {
         }
         return st;
     }
+    public static SubjectEntity getSujectbyName(String name) {
+        SubjectEntity st = null;
+        Session session = HibernateUtil.getSessionFactory()
+                .openSession();
+        try {
+            String hql = "select m from SubjectEntity m where m.subjectname =:name";
+            Query query = session.createQuery(hql);
+            query.setString("name",name);
+            st=(SubjectEntity) query.uniqueResult();
+        } catch (HibernateException ex) {
+//Log the exception
+            System.err.println(ex);
+        } finally {
+            session.close();
+        }
+        return st;
+    }
 
     public static boolean addSubject(SubjectEntity sv) {
         Session session = HibernateUtil.getSessionFactory().openSession();

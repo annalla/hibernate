@@ -15,7 +15,6 @@ import javax.swing.*;
 import java.sql.Date;
 
 /**
- *
  * @author Xuyen
  */
 public class jPnQLSubject extends javax.swing.JPanel {
@@ -28,15 +27,17 @@ public class jPnQLSubject extends javax.swing.JPanel {
         labelId.setVisible(false);
         setData();
     }
-    void setData(){
+
+    void setData() {
         btnDelete.setEnabled(false);
         btnEdit.setEnabled(false);
         setClear();
-        ManagementSubjectController controller=new ManagementSubjectController(jPnTable,jTFSearch);
+        ManagementSubjectController controller = new ManagementSubjectController(jPnTable, jTFSearch);
         controller.setDataToTableSubject();
-        controller.setField(btnDelete,btnEdit,jTFidsuject,jTFsuject,jTFcredit,labelId);
+        controller.setField(btnDelete, btnEdit, jTFidsuject, jTFsuject, jTFcredit, labelId);
     }
-    void setClear(){
+
+    void setClear() {
         jTFcredit.setText("");
         jTFsuject.setText("");
         jTFidsuject.setText("");
@@ -267,6 +268,7 @@ public class jPnQLSubject extends javax.swing.JPanel {
                         .addComponent(jPnTable, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 600, Short.MAX_VALUE)
         );
     }// </editor-fold>
+
     private void jTFidsubjectKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jUsernameKeyReleased
         // TODO add your handling code here:
         if (evt.getKeyCode() == evt.VK_ENTER) {
@@ -274,22 +276,26 @@ public class jPnQLSubject extends javax.swing.JPanel {
 
         }
     }
+
     private void jTFsubjectKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jUsernameKeyReleased
         // TODO add your handling code here:
         if (evt.getKeyCode() == evt.VK_ENTER) {
             jTFcredit.requestFocus();
         }
     }
+
     private void jTFcreditKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jUsernameKeyReleased
         // TODO add your handling code here:
         if (evt.getKeyCode() == evt.VK_ENTER) {
             addSubject();
         }
     }
+
     private void btnClearActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
         setClear();
     }
+
     private void btnSeeActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
         setData();
@@ -314,9 +320,10 @@ public class jPnQLSubject extends javax.swing.JPanel {
         // TODO add your handling code here:
         addSubject();
     }
-    public void deleteSubject(){
-        int id=Integer.parseInt(labelId.getText());
-        if(SubjectDAO.deleteSubject(SubjectDAO.getSubject(id))){
+
+    public void deleteSubject() {
+        int id = Integer.parseInt(labelId.getText());
+        if (SubjectDAO.deleteSubject(SubjectDAO.getSubject(id))) {
             JOptionPane.showMessageDialog(null, "Xóa thành công!");
             setData();
             setClear();
@@ -332,11 +339,11 @@ public class jPnQLSubject extends javax.swing.JPanel {
         String idsuject = jTFidsuject.getText();
         String subject = jTFsuject.getText();
         String credit = jTFcredit.getText();
-        if (idsuject.length() == 0 || subject.length() == 0||credit.length()==0) {
+        if (idsuject.length() == 0 || subject.length() == 0 || credit.length() == 0) {
             JOptionPane.showMessageDialog(null, "Không để trống!");
             return;
         }
-        SubjectEntity s=new SubjectEntity();
+        SubjectEntity s = new SubjectEntity();
         s.setSubjectId(idsuject);
         s.setSubjectname(subject);
         s.setCredit(Integer.parseInt(credit));
@@ -361,6 +368,15 @@ public class jPnQLSubject extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null, "Không để trống!");
             return;
         }
+        boolean isNumeric = (credit != null && credit.matches("[0-9]+"));
+        if (!isNumeric) {
+            JOptionPane.showMessageDialog(null, "Tín chỉ là số!");
+            return;
+        }
+        if(Integer.parseInt(credit)<=0||Integer.parseInt(credit)>20){
+            JOptionPane.showMessageDialog(null, "Tín chỉ là số >0 và <=20!");
+            return;
+        }
         SubjectEntity s = new SubjectEntity();
         s.setSubjectId(idsuject);
         s.setSubjectname(subject);
@@ -376,7 +392,6 @@ public class jPnQLSubject extends javax.swing.JPanel {
         return;
 
     }
-
 
 
     // Variables declaration - do not modify

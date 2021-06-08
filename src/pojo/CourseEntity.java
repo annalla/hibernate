@@ -1,6 +1,8 @@
 package pojo;
 
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 public class CourseEntity {
     private int courseId;
@@ -11,6 +13,24 @@ public class CourseEntity {
     private int maximum;
     private String room;
     private SubjectEntity subject;
+    private SemesterEntity semester;
+    private Set<RegistrationEntity> registered = new HashSet<RegistrationEntity>(0);
+
+    public Set<RegistrationEntity> getRegistered() {
+        return registered;
+    }
+
+    public void setRegistered(Set<RegistrationEntity> registered) {
+        this.registered = registered;
+    }
+
+    public SemesterEntity getSemester() {
+        return semester;
+    }
+
+    public void setSemester(SemesterEntity semester) {
+        this.semester = semester;
+    }
 
     public String getRoom() {
         return room;

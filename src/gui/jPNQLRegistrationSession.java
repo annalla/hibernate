@@ -18,13 +18,14 @@ import java.sql.Date;
 import java.sql.Timestamp;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.List;
 
 /**
  *
  * @author Xuyen
  */
 public class jPNQLRegistrationSession extends javax.swing.JPanel {
-    public static SemesterEntity current= new SemesterEntity();
+    public static SemesterEntity current= null;
     public jPNQLRegistrationSession() {
         initComponents();
         setChoosehour();
@@ -43,8 +44,14 @@ public class jPNQLRegistrationSession extends javax.swing.JPanel {
         jCBhourend.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22","23"}));
 
     }
-    void setCurrentPeriod(){
-        current= SemesterDAO.getSemester(jPnQLSemester.currentSemester);
+     public static void setCurrentPeriod(){
+        List<SemesterEntity> list=SemesterDAO.getSemesterList();
+        for(SemesterEntity semester:list){
+            if(semester.getIspresent()){
+                current= semester;
+            }
+        }
+
     }
 
     /**

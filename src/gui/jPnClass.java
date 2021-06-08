@@ -60,12 +60,13 @@ public class jPnClass extends javax.swing.JPanel {
         String classname=jTFclassName.getText().toUpperCase();
         String total=jTFtotal.getText();
         String boy=jTFboy.getText();
-        boolean isNumeric = (total != null && total.matches("[0-9]+"));
-        boolean isNumeric2 = (boy != null && boy.matches("[0-9]+"));
+
         if (classname.length() == 0 || total.length() == 0 || boy.length() == 0) {
             JOptionPane.showMessageDialog(null, "Không để trống!");
             return;
         }
+        boolean isNumeric = (total != null && total.matches("[0-9]+"));
+        boolean isNumeric2 = (boy != null && boy.matches("[0-9]+"));
         if(!isNumeric||!isNumeric2){
             JOptionPane.showMessageDialog(null, "Sĩ số và Số nam là số!");
             return;

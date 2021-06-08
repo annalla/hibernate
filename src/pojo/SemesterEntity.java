@@ -1,7 +1,9 @@
 package pojo;
 
 import java.sql.Date;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 public class SemesterEntity {
     private int semesterId;
@@ -10,6 +12,15 @@ public class SemesterEntity {
     private Date startsemester;
     private Date endsemester;
     public boolean ispresent;
+    private Set<CourseEntity> courses= new HashSet<CourseEntity>(0);
+
+    public Set<CourseEntity> getCourses() {
+        return courses;
+    }
+
+    public void setCourses(Set<CourseEntity> courses) {
+        this.courses = courses;
+    }
 
     public boolean getIspresent(){
         return ispresent;

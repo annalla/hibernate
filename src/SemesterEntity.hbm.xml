@@ -24,5 +24,11 @@
         <property name="ispresent">
             <column name="ispresent" sql-type="boolean"/>
         </property>
+        <set inverse="true" name="courses" fetch="join" lazy="false">
+            <key>
+                <column length="45" name="semester_id" not-null="true"/>
+            </key>
+            <one-to-many class="pojo.CourseEntity"/>
+        </set>
     </class>
 </hibernate-mapping>

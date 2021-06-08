@@ -31,5 +31,15 @@
                      fetch="select" lazy="false">
             <column length="45" name="sub_id" not-null="true"/>
         </many-to-one>
+        <many-to-one class="pojo.SemesterEntity" name="semester"
+                     fetch="select" lazy="false">
+            <column length="45" name="semester_id" not-null="true"/>
+        </many-to-one>
+        <set inverse="true" name="registered" fetch="join" lazy="false">
+            <key>
+                <column length="45" name="course_id" not-null="true"/>
+            </key>
+            <one-to-many class="pojo.RegistrationEntity"/>
+        </set>
     </class>
 </hibernate-mapping>
