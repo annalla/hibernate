@@ -2,6 +2,7 @@ package controller;
 
 import com.toedter.calendar.JDateChooser;
 import dao.CourseDAO;
+import dao.RegistrationDAO;
 import dao.StudentDAO;
 import gui.RegisterjPn;
 import pojo.CourseEntity;
@@ -18,6 +19,7 @@ import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
+import java.util.List;
 
 public class manageRegisterCourse {
     private JPanel jPnView;
@@ -29,7 +31,7 @@ public class manageRegisterCourse {
     private ClassTableModel classTableModel = null;
     private TableRowSorter<TableModel> rowSorter = null;
 
-    private final String[] COLUMNSCourse = {"STT", "Mã MH", "Tên MH", "Lớp","Số tín chỉ","GVLT", "Lịch học","Slot tối đa"};
+    private final String[] COLUMNSCourse = {"STT", "Mã MH", "Tên MH", "Lớp","Số tín chỉ","GVLT", "Lịch học","Slot tối đa","Thời gian ĐK"};
 
     //    private TableRowSorter<TableModel> rowSorter = null;
     public manageRegisterCourse(JPanel jPnView, JTextField jtfSearchh,JLabel id) {
@@ -141,7 +143,8 @@ public class manageRegisterCourse {
         StudentEntity st = StudentDAO.getStudentbyUsername(username);
 
         ArrayList<RegistrationEntity> list = new ArrayList<>();
-        for (RegistrationEntity r : st.getRegistered()) {
+        List<RegistrationEntity> ds= RegistrationDAO.listRegistration(username,RegisterjPn.semester.getSemesterId());
+        for (RegistrationEntity r : ds) {
             list.add(r);
         }
 
@@ -205,6 +208,7 @@ public class manageRegisterCourse {
         table.getColumnModel().getColumn(5).setMinWidth(110);
         table.getColumnModel().getColumn(6).setMinWidth(140);
         table.getColumnModel().getColumn(7).setMinWidth(70);
+        table.getColumnModel().getColumn(8).setMinWidth(150);
         table.setFont(new Font("Arial", Font.PLAIN, 14));
         table.setRowHeight(30);
         table.validate();
@@ -212,7 +216,7 @@ public class manageRegisterCourse {
 
         JScrollPane scroll = new JScrollPane();
         scroll.getViewport().add(table);
-        scroll.setPreferredSize(new Dimension(1100, 400));
+        scroll.setPreferredSize(new Dimension(1200, 400));
         jPnView.removeAll();
         //jPnView.setLayout(new CardLayout());
         jPnView.setLayout(new BorderLayout());

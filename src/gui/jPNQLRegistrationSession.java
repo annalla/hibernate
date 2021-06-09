@@ -46,10 +46,16 @@ public class jPNQLRegistrationSession extends javax.swing.JPanel {
     }
      public static void setCurrentPeriod(){
         List<SemesterEntity> list=SemesterDAO.getSemesterList();
+        boolean flag=false;
         for(SemesterEntity semester:list){
             if(semester.getIspresent()){
                 current= semester;
+                flag=true;
+                break;
             }
+        }
+        if(!flag){
+            current=null;
         }
 
     }

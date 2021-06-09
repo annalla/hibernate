@@ -269,7 +269,7 @@ public class ManagementStudentListController {
         table.getColumnModel().getColumn(6).setMinWidth(30);
         table.getColumnModel().getColumn(7).setMinWidth(80);
         table.getColumnModel().getColumn(8).setMinWidth(80);
-        table.getColumnModel().getColumn(9).setMinWidth(170);
+        table.getColumnModel().getColumn(9).setMinWidth(160);
         table.setFont(new Font("Arial", Font.PLAIN, 14));
         table.setRowHeight(25);
         table.validate();
@@ -277,7 +277,7 @@ public class ManagementStudentListController {
 
         JScrollPane scroll = new JScrollPane();
         scroll.getViewport().add(table);
-        scroll.setPreferredSize(new Dimension(800, 400));
+        scroll.setPreferredSize(new Dimension(1200, 400));
         jPnView.removeAll();
         //jPnView.setLayout(new CardLayout());
         jPnView.setLayout(new BorderLayout());

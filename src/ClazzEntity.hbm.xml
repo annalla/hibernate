@@ -21,7 +21,7 @@
         <property name="girl">
             <column name="girl" sql-type="integer"/>
         </property>
-        <set inverse="true" name="students" fetch="join" lazy="false">
+        <set inverse="true" name="students" cascade="delete" fetch="join" lazy="false">
             <key>
                 <column length="45" name="class_id" not-null="true"/>
             </key>

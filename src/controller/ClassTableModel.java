@@ -41,25 +41,25 @@ public class ClassTableModel {
             obj[5] = course.getTeacher();
             String lh = "";
             switch (course.getDay()) {
-                case 1:
+                case 2:
                     lh += "T2,";
                     break;
-                case 2:
+                case 3:
                     lh += "T3,";
                     break;
-                case 3:
+                case 4:
                     lh += "T4,";
                     break;
-                case 4:
+                case 5:
                     lh += "T5,";
                     break;
-                case 5:
+                case 6:
                     lh += "T6,";
                     break;
-                case 6:
+                case 7:
                     lh += "T7,";
                     break;
-                case 7:
+                case 8:
                     lh += "CN,";
                     break;
             }
@@ -114,25 +114,25 @@ public class ClassTableModel {
             obj[5] = c.getTeacher();
             String lh = "";
             switch (c.getDay()) {
-                case 1:
+                case 2:
                     lh += "T2,";
                     break;
-                case 2:
+                case 3:
                     lh += "T3,";
                     break;
-                case 3:
+                case 4:
                     lh += "T4,";
                     break;
-                case 4:
+                case 5:
                     lh += "T5,";
                     break;
-                case 5:
+                case 6:
                     lh += "T6,";
                     break;
-                case 6:
+                case 7:
                     lh += "T7,";
                     break;
-                case 7:
+                case 8:
                     lh += "CN,";
                     break;
             }
@@ -305,25 +305,25 @@ public class ClassTableModel {
             obj[5] = course.getTeacher();
             String lh = "";
             switch (course.getDay()) {
-                case 1:
+                case 2:
                     lh += "T2,";
                     break;
-                case 2:
+                case 3:
                     lh += "T3,";
                     break;
-                case 3:
+                case 4:
                     lh += "T4,";
                     break;
-                case 4:
+                case 5:
                     lh += "T5,";
                     break;
-                case 5:
+                case 6:
                     lh += "T6,";
                     break;
-                case 6:
+                case 7:
                     lh += "T7,";
                     break;
-                case 7:
+                case 8:
                     lh += "CN,";
                     break;
             }
@@ -378,25 +378,25 @@ public class ClassTableModel {
             obj[5] = course.getTeacher();
             String lh = "";
             switch (course.getDay()) {
-                case 1:
+                case 2:
                     lh += "T2,";
                     break;
-                case 2:
+                case 3:
                     lh += "T3,";
                     break;
-                case 3:
+                case 4:
                     lh += "T4,";
                     break;
-                case 4:
+                case 5:
                     lh += "T5,";
                     break;
-                case 5:
+                case 6:
                     lh += "T6,";
                     break;
-                case 6:
+                case 7:
                     lh += "T7,";
                     break;
-                case 7:
+                case 8:
                     lh += "CN,";
                     break;
             }
@@ -417,6 +417,7 @@ public class ClassTableModel {
             lh += course.getRoom();
             obj[6] = lh;
             obj[7]=course.getMaximum();
+            obj[8]=s.getTime();
             i++;
             dtm.addRow(obj);
 

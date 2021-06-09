@@ -41,7 +41,7 @@ public class StudentController {
     private ClassTableModel classTableModel = null;
     private TableRowSorter<TableModel> rowSorter = null;
 
-    private final String[] COLUMNSCourse = {"STT", "Mã MH", "Tên MH", "Lớp","Số tín chỉ","GVLT", "Lịch học","Slot tối đa"};
+    private final String[] COLUMNSCourse = {"STT", "Mã MH", "Tên MH", "Lớp","Số tín chỉ","GVLT", "Lịch học","Slot tối đa","Thời gian ĐK"};
 
     private final String[] COLUMNSMinitry = {"STT", "Username", "Password", "Họ tên", "Giới tính", "Ngày sinh", "Địa chỉ"};
 
@@ -118,6 +118,7 @@ public class StudentController {
         table.getColumnModel().getColumn(5).setMinWidth(110);
         table.getColumnModel().getColumn(6).setMinWidth(140);
         table.getColumnModel().getColumn(7).setMinWidth(70);
+        table.getColumnModel().getColumn(8).setMinWidth(150);
         table.setFont(new Font("Arial", Font.PLAIN, 14));
         table.setRowHeight(30);
         table.validate();

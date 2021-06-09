@@ -426,7 +426,7 @@ public class AccountGVjPn extends javax.swing.JPanel {
 
     private void updateInformation() {
         if (updateInfor()) {
-            JOptionPane.showMessageDialog(null, "Cập nhật thông tn thành công");
+            JOptionPane.showMessageDialog(null, "Cập nhật thông tin thành công");
             setInforStudent();
         } else {
             JOptionPane.showMessageDialog(null, "Cập nhật thất bại!");
@@ -493,7 +493,6 @@ public class AccountGVjPn extends javax.swing.JPanel {
             return false;
         }
         newPass.setPassword(newpass);
-        System.out.println(newPass.getPassword());
         return MinitryDAO.updateMinitry(newPass);
     }
 

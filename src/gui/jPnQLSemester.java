@@ -8,22 +8,16 @@ package gui;
 import controller.ManagementSemesterController;
 import dao.CourseDAO;
 import dao.SemesterDAO;
-import dao.SubjectDAO;
 import pojo.SemesterEntity;
-import pojo.SubjectEntity;
 
 import javax.swing.*;
 import java.sql.Date;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
 /**
  * @author Xuyen
  */
 public class jPnQLSemester extends javax.swing.JPanel {
-    //public static int currentSemester = 0;
-
     /**
      * Creates new form jPnQLGV
      */
@@ -313,7 +307,7 @@ public class jPnQLSemester extends javax.swing.JPanel {
 
     public void deleteSemester() {
         int id = Integer.parseInt(labelId.getText());
-        if (CourseDAO.deleteCourse(CourseDAO.getCoursebyId(id))) {
+        if (SemesterDAO.deleteSemester(SemesterDAO.getSemester(id))) {
             JOptionPane.showMessageDialog(null, "Xóa thành công!");
             setData();
             setClear();

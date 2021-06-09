@@ -38,6 +38,7 @@ public class jPnQLSubject extends javax.swing.JPanel {
     }
 
     void setClear() {
+        jTFSearch.setText("");
         jTFcredit.setText("");
         jTFsuject.setText("");
         jTFidsuject.setText("");
@@ -343,11 +344,17 @@ public class jPnQLSubject extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null, "Không để trống!");
             return;
         }
-        SubjectEntity s = new SubjectEntity();
+        SubjectEntity s = SubjectDAO.getSubject(Integer.parseInt(labelId.getText()));
         s.setSubjectId(idsuject);
         s.setSubjectname(subject);
         s.setCredit(Integer.parseInt(credit));
-        s.setSubId(Integer.parseInt(labelId.getText()));
+        SubjectEntity dm=SubjectDAO.getSujectbyID(idsuject);
+        if(dm!=null){
+            if(dm.getSubId()!=s.getSubId()){
+                JOptionPane.showMessageDialog(null, "Trùng mã môn học không thể cập nhật!");
+                return;
+            }
+        }
         if (SubjectDAO.updateSubject(s)) {
             JOptionPane.showMessageDialog(null, "Cập nhật thành công!");
             setData();

@@ -7,7 +7,7 @@
     <class name="pojo.MinitryEntity" table="minitry" schema="public" catalog="dkhp">
         <id name="minitryId">
             <column name="minitry_id" sql-type="integer"/>
-            <generator class="increment"></generator>
+            <generator class="increment"> </generator>
         </id>
         <property name="username">
             <column name="username" sql-type="varchar(50)" length="50"/>

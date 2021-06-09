@@ -12,6 +12,24 @@ import util.HibernateUtil;
 import java.util.List;
 
 public class RegistrationDAO {
+    public static List<RegistrationEntity>listRegistration(String username,int semester){
+        List<RegistrationEntity> ds=null;
+        Session session = HibernateUtil.getSessionFactory()
+                .openSession();
+        try {
+            String hql = "select m from RegistrationEntity m where m.course.semester.semesterId =:semester and m.student.username=:username";
+            Query query = session.createQuery(hql);
+            query.setString("username", username);
+            query.setInteger("semester", semester);
+            ds=query.list();
+        } catch (HibernateException ex) {
+//Log the exception
+            System.err.println(ex);
+        } finally {
+            session.close();
+        }
+        return ds;
+    }
     public static RegistrationEntity getRegistbyId(int id) {
         RegistrationEntity sach = null;
         Session session = HibernateUtil.getSessionFactory()

@@ -24,7 +24,7 @@ import java.sql.Date;
 
 
 public class AccountStudentjPn extends javax.swing.JPanel {
-    public static StudentEntity st = StudentDAO.getStudentbyUsername(HomePageStudent.nameLogin);
+    public static StudentEntity st = null;
 
     /**
      * Creates new form AccountStudentjPn
@@ -40,7 +40,7 @@ public class AccountStudentjPn extends javax.swing.JPanel {
         jTFName.setEnabled(false);
         jTFMSSV.setText(st.getMssv());
         jTFMSSV.setEnabled(false);
-        jTFUsername.setText(st.getClass().getName());
+        jTFUsername.setText(st.getClasss().getClassname());
         jTFUsername.setEnabled(false);
         jTAAddress.setText(st.getAddress());
         jTAAddress.setEnabled(false);
@@ -164,12 +164,46 @@ public class AccountStudentjPn extends javax.swing.JPanel {
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel2.setText("Họ tên:");
-
+        jPFoldpass.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jOldpassKeyReleased(evt);
+            }
+        });
+        jPFnewpass.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jNewpassKeyReleased(evt);
+            }
+        });
+        jTFrepass.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jRepassKeyReleased(evt);
+            }
+        });
+        jTFName.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTFNameKeyReleased(evt);
+            }
+        });
+        jCBgender.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jGenderKeyReleased(evt);
+            }
+        });
+        jDCBirthday.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jDCBirthdayReleased(evt);
+            }
+        });
+        jTAAddress.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jAddressKeyReleased(evt);
+            }
+        });
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel4.setText("MSSV:");
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel3.setText("Lớp:");
+        jLabel3.setText("Username:");
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel5.setText("Ngày sinh:");
@@ -194,38 +228,13 @@ public class AccountStudentjPn extends javax.swing.JPanel {
                 jPFoldpassActionPerformed(evt);
             }
         });
-        jPFoldpass.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                jOldpassKeyReleased(evt);
-            }
-        });
-        jPFnewpass.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                jNewpassKeyReleased(evt);
-            }
-        });
-        jTFrepass.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                jRepassKeyReleased(evt);
-            }
-        });
 
         jTAAddress.setColumns(20);
         jTAAddress.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jTAAddress.setRows(5);
         jScrollPane1.setViewportView(jTAAddress);
-        jTAAddress.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                jAddressKeyReleased(evt);
-            }
-        });
 
         jTFName.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jTFName.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                jTFNameKeyReleased(evt);
-            }
-        });
 
         jTFUsername.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
@@ -233,11 +242,7 @@ public class AccountStudentjPn extends javax.swing.JPanel {
 
         jDCBirthday.setFocusable(false);
         jDCBirthday.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jDCBirthday.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                jDCBirthdayReleased(evt);
-            }
-        });
+
         btnUpdate.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         btnUpdate.setText("Cập nhật");
         btnUpdate.setActionCommand("");
@@ -264,12 +269,8 @@ public class AccountStudentjPn extends javax.swing.JPanel {
         });
 
         jCBgender.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jCBgender.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"Nữ", "Nam"}));
-        jCBgender.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                jGenderKeyReleased(evt);
-            }
-        });
+        jCBgender.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Nữ", "Nam" }));
+
         btnSave.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         btnSave.setText("Lưu");
         btnSave.addActionListener(new java.awt.event.ActionListener() {
@@ -285,12 +286,13 @@ public class AccountStudentjPn extends javax.swing.JPanel {
                 btnSavePassActionPerformed(evt);
             }
         });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
                 layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(layout.createSequentialGroup()
-                                .addGap(70, 70, 70)
+                                .addGap(50, 50, 50)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addComponent(jLabel4)
                                         .addComponent(jLabel3)
@@ -333,7 +335,7 @@ public class AccountStudentjPn extends javax.swing.JPanel {
                                                                                 .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 453, Short.MAX_VALUE)
                                                                                 .addComponent(jDCBirthday, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
                                                 .addComponent(jTFMSSV, javax.swing.GroupLayout.PREFERRED_SIZE, 453, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addContainerGap(407, Short.MAX_VALUE))
+                                .addContainerGap(182, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
                 layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -356,7 +358,7 @@ public class AccountStudentjPn extends javax.swing.JPanel {
                                                         .addComponent(jLabel4)
                                                         .addComponent(jTFMSSV, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                                         .addComponent(jDCBirthday, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                         .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -388,7 +390,7 @@ public class AccountStudentjPn extends javax.swing.JPanel {
                                                                 .addComponent(btnUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                                 .addComponent(btnSave, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
                                                         .addComponent(btnChangPass, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                                .addContainerGap(164, Short.MAX_VALUE))
+                                .addGap(134, 134, 134))
         );
     }// </editor-fold>
 

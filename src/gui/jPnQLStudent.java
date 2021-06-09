@@ -54,7 +54,6 @@ public class jPnQLStudent extends javax.swing.JPanel {
         labelId.setText("");
         jTASubject.setEnabled(false);
 
-
     }
 
     /**
@@ -235,7 +234,7 @@ public class jPnQLStudent extends javax.swing.JPanel {
         jTASubject.setColumns(20);
         jTASubject.setRows(10);
         jTASubject.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jTASubject.setPreferredSize(new java.awt.Dimension(164, 64));
+        //jTASubject.setPreferredSize(new java.awt.Dimension(164, 64));
         jScrollPane2.setViewportView(jTASubject);
 
         btnSee.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -492,6 +491,7 @@ public class jPnQLStudent extends javax.swing.JPanel {
     }*/
 
     public void setClear() {
+        jTFSearch.setText("");
         jTFUserame.setText("");
         jTFName.setText("");
         jTAadd.setText("");
@@ -522,15 +522,20 @@ public class jPnQLStudent extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null, "Không để trống!");
             return;
         }
-        StudentEntity minitry = new StudentEntity();
+        StudentEntity minitry = StudentDAO.getStudentbyId(Integer.parseInt(labelId.getText()));
         minitry.setMssv(mssv);
-        minitry.setUsername(username);
         minitry.setFullname(name);
-        minitry.setPassword(username);
         minitry.setBirthday(date1);
         minitry.setGender(gender);
         minitry.setAddress(address);
-        minitry.setStudentId(Integer.parseInt(labelId.getText()));
+        StudentEntity st1=StudentDAO.getStudentbyUsername(mssv);
+        if(st1!=null){
+            if(st1.getStudentId()!= minitry.getStudentId()){
+                JOptionPane.showMessageDialog(null, "MSSV trùng không thể thay đổi!");
+                return;
+            }
+        }
+        minitry.setUsername(mssv);
         int index = jCBclass.getSelectedIndex();
         ClazzEntity cl = ClassDAO.getClassbyClassname(CBclass[index]);
         minitry.setClasss(cl);

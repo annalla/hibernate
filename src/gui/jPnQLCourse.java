@@ -52,6 +52,7 @@ public class jPnQLCourse extends javax.swing.JPanel {
         controller.setDataToTableCourseofCurrentSemester();
     }
     void setClear(){
+        jTFSearch.setText("");
         jTFmaximum.setText("");
         jTFClass.setText("");
         btnDelete.setEnabled(false);

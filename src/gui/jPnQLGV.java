@@ -3,9 +3,12 @@ package gui;
 
 import controller.StudentController;
 import dao.MinitryDAO;
+import dao.StudentDAO;
 import pojo.MinitryEntity;
+import pojo.StudentEntity;
 
 import javax.swing.*;
+import java.awt.*;
 import java.sql.Date;
 
 
@@ -60,7 +63,7 @@ public class jPnQLGV extends javax.swing.JPanel {
         btnClear = new javax.swing.JButton();
         jPnTable = new javax.swing.JPanel();
 
-        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Tahoma",0, 14)); // NOI18N
         jLabel2.setText("Username:");
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -365,6 +368,7 @@ public class jPnQLGV extends javax.swing.JPanel {
 
     }
     public void setClear() {
+        jTFSearch.setText("");
         jTFUserame.setText("");
         jTFName.setText("");
         jTAadd.setText("");
@@ -392,14 +396,20 @@ public class jPnQLGV extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null, "Không để trống!");
             return;
         }
-        MinitryEntity minitry = new MinitryEntity();
+        MinitryEntity minitry = MinitryDAO.getInforMinitry(Integer.parseInt(labelId.getText()));
         minitry.setUsername(username);
         minitry.setFullname(name);
-        minitry.setPassword(username);
         minitry.setBirthday(date1);
         minitry.setGender(gender);
         minitry.setAddress(address);
-        minitry.setMinitryId(Integer.parseInt(labelId.getText()));
+        MinitryEntity st1= MinitryDAO.getMinitrybyUsername(username);
+        if(st1!=null){
+            if(st1.getMinitryId()!= minitry.getMinitryId()){
+                JOptionPane.showMessageDialog(null, "username trùng không thể thay đổi!");
+                return;
+            }
+        }
+        minitry.setUsername(username);
         if (MinitryDAO.updateMinitry(minitry)) {
             JOptionPane.showMessageDialog(null, "Cập nhật thành công!");
             setData();

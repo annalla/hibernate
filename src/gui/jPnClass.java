@@ -37,6 +37,7 @@ public class jPnClass extends javax.swing.JPanel {
     }
 
     void setClear() {
+        jTFSearch.setText("");
         jTFtotal.setText("");
         jTFclassName.setText("");
         jTFboy.setText("");

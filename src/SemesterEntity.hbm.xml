@@ -7,7 +7,7 @@
     <class name="pojo.SemesterEntity" table="semester" schema="public" catalog="dkhp">
         <id name="semesterId">
             <column name="semester_id" sql-type="integer"/>
-            <generator class="increment"></generator>
+            <generator class="increment"> </generator>
         </id>
         <property name="term">
             <column name="term" sql-type="varchar(50)" length="50"/>
@@ -30,7 +30,7 @@
             </key>
             <one-to-many class="pojo.CourseEntity"/>
         </set>
-        <set inverse="true" name="session" fetch="join" lazy="false">
+        <set inverse="true" name="session" cascade="delete" fetch="join" lazy="false">
             <key>
                 <column length="45" name="semester_id" not-null="true"/>
             </key>

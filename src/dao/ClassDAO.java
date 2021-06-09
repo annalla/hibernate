@@ -5,9 +5,6 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 import pojo.ClazzEntity;
-import pojo.MinitryEntity;
-import pojo.StudentEntity;
-import pojo.SubjectEntity;
 import util.HibernateUtil;
 
 import java.util.List;
