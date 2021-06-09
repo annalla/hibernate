@@ -277,7 +277,7 @@ public class ManagementStudentListController {
 
         JScrollPane scroll = new JScrollPane();
         scroll.getViewport().add(table);
-        scroll.setPreferredSize(new Dimension(700, 400));
+        scroll.setPreferredSize(new Dimension(800, 400));
         jPnView.removeAll();
         //jPnView.setLayout(new CardLayout());
         jPnView.setLayout(new BorderLayout());

@@ -30,5 +30,11 @@
             </key>
             <one-to-many class="pojo.CourseEntity"/>
         </set>
+        <set inverse="true" name="session" fetch="join" lazy="false">
+            <key>
+                <column length="45" name="semester_id" not-null="true"/>
+            </key>
+            <one-to-many class="pojo.RegistrationsessionEntity"/>
+        </set>
     </class>
 </hibernate-mapping>

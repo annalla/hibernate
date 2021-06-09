@@ -11,6 +11,7 @@ import util.HibernateUtil;
 import java.util.List;
 
 public class StudentDAO {
+
     public static List<StudentEntity> getStudentList() {
         List<StudentEntity> ds = null;
         Session session = HibernateUtil.getSessionFactory().openSession();

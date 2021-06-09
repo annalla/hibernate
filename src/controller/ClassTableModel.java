@@ -278,8 +278,7 @@ public class ClassTableModel {
         }
         return dtm;
     }
-
-    public DefaultTableModel setTableCourse(ArrayList<RegistrationEntity> listItem, String[] listColumn) {
+    public DefaultTableModel setTableCourseRe(ArrayList<CourseEntity> listItem, String[] listColumn) {
         int columns = listColumn.length;
         DefaultTableModel dtm = new DefaultTableModel() {
             @Override
@@ -295,14 +294,15 @@ public class ClassTableModel {
         dtm.setColumnIdentifiers(listColumn);
         Object[] obj;
         int i = 1;
-        for (RegistrationEntity s : listItem) {
+        for (CourseEntity course : listItem) {
             obj = new Object[columns];
-            CourseEntity course = s.getCourse();
             SubjectEntity subject = course.getSubject();
             obj[0] = i;
             obj[1] = subject.getSubjectId();
+            obj[3] = course.getCoursename().split(" - ")[1];
             obj[2] = subject.getSubjectname();
-            obj[3] = subject.getCredit();
+            obj[4] = subject.getCredit();
+            obj[5] = course.getTeacher();
             String lh = "";
             switch (course.getDay()) {
                 case 1:
@@ -342,7 +342,81 @@ public class ClassTableModel {
                     break;
             }
             lh += course.getRoom();
-            obj[4] = lh;
+            obj[6] = lh;
+            obj[7]=course.getMaximum();
+            i++;
+            dtm.addRow(obj);
+
+        }
+        return dtm;
+    }
+    public DefaultTableModel setTableCourse(ArrayList<RegistrationEntity> listItem, String[] listColumn) {
+        int columns = listColumn.length;
+        DefaultTableModel dtm = new DefaultTableModel() {
+            @Override
+            public boolean isCellEditable(int rowIndex, int colIndex) {
+                return false;
+            }
+
+            @Override
+            public Class<?> getColumnClass(int columnIndex) {
+                return String.class;
+            }
+        };
+        dtm.setColumnIdentifiers(listColumn);
+        Object[] obj;
+        int i = 1;
+        for (RegistrationEntity s : listItem) {
+            obj = new Object[columns];
+            CourseEntity course = s.getCourse();
+            SubjectEntity subject = course.getSubject();
+            obj[0] = i;
+            obj[1] = subject.getSubjectId();
+            obj[3] = course.getCoursename().split(" - ")[1];
+            obj[2] = subject.getSubjectname();
+            obj[4] = subject.getCredit();
+            obj[5] = course.getTeacher();
+            String lh = "";
+            switch (course.getDay()) {
+                case 1:
+                    lh += "T2,";
+                    break;
+                case 2:
+                    lh += "T3,";
+                    break;
+                case 3:
+                    lh += "T4,";
+                    break;
+                case 4:
+                    lh += "T5,";
+                    break;
+                case 5:
+                    lh += "T6,";
+                    break;
+                case 6:
+                    lh += "T7,";
+                    break;
+                case 7:
+                    lh += "CN,";
+                    break;
+            }
+            switch (course.getPeriod()) {
+                case 1:
+                    lh += "7:30-9:30,";
+                    break;
+                case 2:
+                    lh += "9:30-11:30,";
+                    break;
+                case 3:
+                    lh += "13:30-15:30,";
+                    break;
+                case 4:
+                    lh += "15:30-17:30,";
+                    break;
+            }
+            lh += course.getRoom();
+            obj[6] = lh;
+            obj[7]=course.getMaximum();
             i++;
             dtm.addRow(obj);
 

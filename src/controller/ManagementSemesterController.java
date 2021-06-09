@@ -111,7 +111,7 @@ public class ManagementSemesterController {
 
         // design
         table.getTableHeader().setFont(new Font("Arial", Font.BOLD, 14));
-        table.getTableHeader().setPreferredSize(new Dimension(40, 25));
+       // table.getTableHeader().setPreferredSize(new Dimension(40, 25));
         table.getColumnModel().getColumn(0).setMinWidth(40);
         table.getColumnModel().getColumn(1).setMinWidth(100);
         table.getColumnModel().getColumn(2).setMinWidth(120);

@@ -13,6 +13,15 @@ public class SemesterEntity {
     private Date endsemester;
     public boolean ispresent;
     private Set<CourseEntity> courses= new HashSet<CourseEntity>(0);
+    private Set<RegistrationsessionEntity> session= new HashSet<RegistrationsessionEntity>(0);
+
+    public Set<RegistrationsessionEntity> getSession() {
+        return session;
+    }
+
+    public void setSession(Set<RegistrationsessionEntity> session) {
+        this.session = session;
+    }
 
     public Set<CourseEntity> getCourses() {
         return courses;
